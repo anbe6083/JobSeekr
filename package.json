@@ -1,10 +1,12 @@
 {
   "name": "jobseekr",
   "version": "1.0.0",
-  "description": "Helps people organize their job search into new Trello Boards, Lists and cards",
+  "description":
+    "Helps people organize their job search into new Trello Boards, Lists and cards",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
