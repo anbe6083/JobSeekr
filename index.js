@@ -34,20 +34,30 @@ const getJobListings = () => {
   return request;
 };
 
-const getLocations = () => {
-  const request = axios
-    .get(
-      `https://authenticjobs.com/api/?api_key=${
-        keys.authenticJobs.api_key
-      }&method=aj.jobs.getlocations&format=json`
-    )
-    .then(async json => {
-      return await json.data.locations['location'];
-    })
-    .catch(err => {
-      return Promise.reject(err);
+const getLocations = async () => {
+  const jobListings = await getJobListings();
+  const locations = [];
+  jobListings.forEach(jobListing => {
+    //find if there exists a location object
+    const existingLocationEntry = locations.find(obj => {
+      if (jobListing.company.location) {
+        return obj.location == jobListing.company.location['name'];
+      }
     });
-  return request;
+    //if the location object already exists, push the new jobEntry to the list of jobs in that location
+    //else, make a new location object and push the job listing to the array of jobs
+    if (existingLocationEntry) {
+      existingLocationEntry['jobs'].push(jobListing);
+    } else {
+      if (jobListing.company.location) {
+        locations.push({
+          name: jobListing.company.location['name'],
+          jobs: [jobListing]
+        });
+      }
+    }
+  });
+  return locations;
 };
 
 const getCurrentDate = () => {
@@ -66,8 +76,7 @@ const getCurrentDate = () => {
 };
 
 const createNewBoard = () => {
-  //TODO: URL is static
-  axios
+  const request = axios
     .post(
       `https://api.trello.com/1/boards/?name=${'Job Search started on: ' +
         getCurrentDate()}&defaultLabels=true&keepFromSource=none&prefs_permissionLevel=private&prefs_voting=disabled&prefs_comments=members&prefs_invitations=members&prefs_selfJoin=true&prefs_cardCovers=true&prefs_background=blue&prefs_cardAging=regular&key=${
@@ -76,35 +85,32 @@ const createNewBoard = () => {
     )
     .then(response => {
       createNewLists(response.data['id']);
+      return response.data['id'];
     })
     .catch(err => {
-      console.log('createNewBoard error: ' + err);
       return Promise.reject(err);
     });
+  return request;
 };
 
 const createNewLists = async boardId => {
   //TODO: URL is static
   const locations = await [...new Set(await getLocations())];
-  locations.forEach(obj => {
-    obj['jobs'] = [];
-  });
-  const jobListings = await getJobListings();
-  locations.forEach(obj => {
-    jobListings.forEach(jobListing => {
-      if (
-        jobListing.company.location &&
-        (jobListing.company.location['name'].includes(obj['name']) ||
-          obj['name'].includes(jobListing.company.location['name']))
-      ) {
-        console.log(
-          obj['name'] + ' equals ' + jobListing.company.location['name']
-        );
-        obj['jobs'].push(jobListing);
-        console.log(obj);
-      }
-    });
-  });
+  // locations.forEach(obj => {
+  //   obj['jobs'] = [];
+  // });
+  // const jobListings = await getJobListings();
+  // locations.forEach(obj => {
+  //   jobListings.forEach(jobListing => {
+  //     if (
+  //       jobListing.company.location &&
+  //       (jobListing.company.location['name'].includes(obj['name']) ||
+  //         obj['name'].includes(jobListing.company.location['name']))
+  //     ) {
+  //       obj['jobs'].push(jobListing);
+  //     }
+  //   });
+  // });
 
   locations.forEach(location => {
     createNewList(boardId, location);
@@ -152,7 +158,6 @@ const createNewList = (boardId, locationObj) => {
 };
 
 const createNewCard = (newListing, trelloListId) => {
-  console.log('createNewCard');
   const description = `Perks: ${
     !newListing['perks'] ? 'None Listed' : newListing['perks']
   } \n 
@@ -187,9 +192,8 @@ const createNewCard = (newListing, trelloListId) => {
     });
 };
 
-app.get('/api/trelloNewBoard', (req, res) => {
-  createNewBoard();
-  res.send('successful');
+app.get('/api/trelloNewBoard', async (req, res) => {
+  res.redirect('http://www.trello.com/b/' + (await createNewBoard()));
 });
 
 app.get('/api/getLocations', async (req, res) => {
@@ -197,7 +201,7 @@ app.get('/api/getLocations', async (req, res) => {
 });
 
 app.get('/api/getJobListings', async (req, res) => {
-  res.send(await fillListsWithCards('5ab1be863dcada8479551a73'));
+  res.send(await getJobListings());
 });
 
 const PORT = process.env.PORT || 5000;
