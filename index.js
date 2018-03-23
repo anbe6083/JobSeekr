@@ -11,22 +11,38 @@ app.get('/api/authJobs', (req, res) => {
     .get(
       `https://authenticjobs.com/api/?api_key=${
         keys.authenticJobs.api_key
-      }&method=aj.jobs.search&keywords=Software%20Engineer, Front%20End%20Engineer&format=json&telecommuting=1`
+      }&method=aj.jobs.search&keywords=Software%20Engineer, Front%20End%20Engineer, Javascript, Node, Node.js, C&format=json`
     )
     .then(json => {
       res.send(json.data.listings['listing']);
     });
 });
 
-const getListings = () => {
+const getJobListings = () => {
   const request = axios
     .get(
       `https://authenticjobs.com/api/?api_key=${
         keys.authenticJobs.api_key
-      }&method=aj.jobs.search&keywords=Software%20Engineer, Front%20End%20Engineer&format=json&telecommuting=1`
+      }&method=aj.jobs.search&keywords=Software%20Engineer, Front%20End%20Engineer, Javascript&format=json`
     )
     .then(json => {
       return json.data.listings['listing'];
+    })
+    .catch(err => {
+      return Promise.reject(err);
+    });
+  return request;
+};
+
+const getLocations = () => {
+  const request = axios
+    .get(
+      `https://authenticjobs.com/api/?api_key=${
+        keys.authenticJobs.api_key
+      }&method=aj.jobs.getlocations&format=json`
+    )
+    .then(async json => {
+      return await json.data.locations['location'];
     })
     .catch(err => {
       return Promise.reject(err);
@@ -54,7 +70,7 @@ const createNewBoard = () => {
   axios
     .post(
       `https://api.trello.com/1/boards/?name=${'Job Search started on: ' +
-        getCurrentDate()}&defaultLabels=true&defaultLists=true&keepFromSource=none&prefs_permissionLevel=private&prefs_voting=disabled&prefs_comments=members&prefs_invitations=members&prefs_selfJoin=true&prefs_cardCovers=true&prefs_background=blue&prefs_cardAging=regular&key=${
+        getCurrentDate()}&defaultLabels=true&keepFromSource=none&prefs_permissionLevel=private&prefs_voting=disabled&prefs_comments=members&prefs_invitations=members&prefs_selfJoin=true&prefs_cardCovers=true&prefs_background=blue&prefs_cardAging=regular&key=${
         keys.trello.api_key
       }&token=${keys.trello.token}`
     )
@@ -63,61 +79,125 @@ const createNewBoard = () => {
     })
     .catch(err => {
       console.log('createNewBoard error: ' + err);
+      return Promise.reject(err);
     });
 };
 
-const createNewLists = boardId => {
+const createNewLists = async boardId => {
   //TODO: URL is static
-  axios
-    .post(
-      `https://api.trello.com/1/lists?name=companies&idBoard=${boardId}&key=${
+  const locations = await [...new Set(await getLocations())];
+  locations.forEach(obj => {
+    obj['jobs'] = [];
+  });
+  const jobListings = await getJobListings();
+  locations.forEach(obj => {
+    jobListings.forEach(jobListing => {
+      if (
+        jobListing.company.location &&
+        (jobListing.company.location['name'].includes(obj['name']) ||
+          obj['name'].includes(jobListing.company.location['name']))
+      ) {
+        console.log(
+          obj['name'] + ' equals ' + jobListing.company.location['name']
+        );
+        obj['jobs'].push(jobListing);
+        console.log(obj);
+      }
+    });
+  });
+
+  locations.forEach(location => {
+    createNewList(boardId, location);
+  });
+};
+
+const getListsFromTrello = async boardId => {
+  const lists = axios
+    .get(
+      `https://api.trello.com/1/boards/${boardId}/lists?key=${
         keys.trello.api_key
       }&token=${keys.trello.token}`
     )
-    .then(async res => {
-      const listings = await getListings();
-      listings.forEach(listing => {
-        createNewCard(listing, res.data['id']);
-      });
+    .then(res => {
+      return Promise.resolve(res['data']);
     })
     .catch(err => {
-      console.log('createNewLists error: ' + err);
+      return Promise.reject(err);
     });
+  return await lists;
+};
+
+const createNewList = (boardId, locationObj) => {
+  //TODO: URL is static
+  const listId = axios
+    .post(
+      `https://api.trello.com/1/lists?name=${
+        locationObj['name']
+      }&idBoard=${boardId}&key=${keys.trello.api_key}&token=${
+        keys.trello.token
+      }`
+    )
+    .then(res => {
+      locationObj['jobs'].forEach(job => {
+        createNewCard(job, res.data['id']);
+      });
+      return res.data['id'];
+    })
+    .catch(err => {
+      return Promise.reject(err);
+      console.log('createNewLocationList error: ' + err);
+    });
+
+  return listId;
 };
 
 const createNewCard = (newListing, trelloListId) => {
-  const perks = !newListing['perks'] ? 'None Listed' : newListing['perks'];
-  const relocation = newListing['relocation_assistance'] ? 'Yes' : 'No';
-  const isRemote = newListing['telecommuting'] ? 'Yes' : 'No';
-  const location = newListing.company.location
-    ? newListing.company.location['name']
-    : 'None Listed';
-  const description = `Perks: ${perks} \n 
+  console.log('createNewCard');
+  const description = `Perks: ${
+    !newListing['perks'] ? 'None Listed' : newListing['perks']
+  } \n 
   Application URL: ${newListing['apply_url']} \n
   Site URL: ${newListing['url']} \n
-  Tagline: ${newListing['tagline']} \n
+  Tagline: ${newListing['tagline'] ? newListing['tagline'] : ''} \n
   Keywords: ${newListing['keywords']} \n
-  Location: ${location} \n
-  Relocation Assistance? ${relocation} \n
-  Remote? ${isRemote} \n`;
+  Location: ${
+    newListing.company.location
+      ? newListing.company.location['name']
+      : 'None Listed'
+  } \n
+  Relocation Assistance? ${
+    newListing['relocation_assistance'] ? 'Yes' : 'No'
+  } \n
+  Remote? ${newListing['telecommuting'] ? 'Yes' : 'No'} \n`;
+  const url = `https://api.trello.com/1/cards?name=${newListing.company[
+    'name'
+  ] +
+    ': ' +
+    newListing['title']}
+  &desc=${description}&idList=${trelloListId}&keepFromSource=all&key=${
+    keys.trello.api_key
+  }&token=${keys.trello.token}`;
+
   axios
-    .post(
-      `https://api.trello.com/1/cards?name=${newListing.company['name'] +
-        ': ' +
-        newListing['title']}
-        &desc=${description}&idList=${trelloListId}&keepFromSource=all&key=${
-        keys.trello.api_key
-      }&token=${keys.trello.token}`
-    )
+    .post(url)
     .then(res => {})
     .catch(err => {
       console.log('createNewCard error: ' + err);
+      return Promise.reject(err);
     });
 };
 
 app.get('/api/trelloNewBoard', (req, res) => {
   createNewBoard();
   res.send('successful');
+});
+
+app.get('/api/getLocations', async (req, res) => {
+  res.send(await getLocations());
+});
+
+app.get('/api/getJobListings', async (req, res) => {
+  res.send(await fillListsWithCards('5ab1be863dcada8479551a73'));
 });
 
 const PORT = process.env.PORT || 5000;

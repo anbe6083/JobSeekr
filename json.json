@@ -1,0 +1,225 @@
+{
+  "options": {
+    "terms": [{ "text": "Brooklyn," }, { "text": "NY," }, { "text": "US" }],
+    "modifiers": [],
+    "modelTypes": ["actions", "cards", "boards", "organizations", "members"],
+    "partial": false
+  },
+  "boards": [],
+  "cards": [
+    {
+      "id": "5aac906b44165b9671e2aeb7",
+      "badges": {
+        "votes": 0,
+        "attachmentsByType": { "trello": { "board": 0, "card": 0 } },
+        "viewingMemberVoted": false,
+        "subscribed": false,
+        "fogbugz": "",
+        "checkItems": 0,
+        "checkItemsChecked": 0,
+        "comments": 0,
+        "attachments": 0,
+        "description": true,
+        "due": null,
+        "dueComplete": false
+      },
+      "checkItemStates": [],
+      "closed": false,
+      "dueComplete": false,
+      "dateLastActivity": "2018-03-17T03:50:03.083Z",
+      "desc":
+        "Perks: None Listed \n \n  Application URL: https://oak.is/hiring/full-stack-engineer/ \n\n  Site URL: https://authenticjobs.com/jobs/30436/full-stack-developer \n\n  Tagline:  \n\n  Keywords: team,writing,product,have,code,products,experience,mdash,your,issues,interested,designers,developers,vision,execute,familiar,restful,development,software,modern,strong,javascript,react,closely,right,stack,york,make,work,about \n\n  Location: Brooklyn, NY, US \n\n  Relocation Assistance? No \n\n  Remote? No \n",
+      "descData": null,
+      "due": null,
+      "email": null,
+      "idBoard": "5aac905c980b3b6ef1ff76ed",
+      "idChecklists": [],
+      "idList": "5aac906a9d2d629291733ef1",
+      "idMembers": [],
+      "idMembersVoted": [],
+      "idShort": 7,
+      "idAttachmentCover": null,
+      "labels": [],
+      "limits": {
+        "attachments": {
+          "perCard": { "status": "ok", "disableAt": 950, "warnAt": 900 }
+        },
+        "checklists": {
+          "perCard": { "status": "ok", "disableAt": 475, "warnAt": 450 }
+        },
+        "stickers": {
+          "perCard": { "status": "ok", "disableAt": 67, "warnAt": 63 }
+        }
+      },
+      "idLabels": [],
+      "manualCoverAttachment": false,
+      "name": "oak: Full Stack Developer\n        ",
+      "pos": 16384,
+      "shortLink": "qSQw6c5J",
+      "shortUrl": "https://trello.com/c/qSQw6c5J",
+      "subscribed": false,
+      "url": "https://trello.com/c/qSQw6c5J/7-oak-full-stack-developer"
+    },
+    {
+      "id": "5aac91490839f0f2caec49ae",
+      "badges": {
+        "votes": 0,
+        "attachmentsByType": { "trello": { "board": 0, "card": 0 } },
+        "viewingMemberVoted": false,
+        "subscribed": false,
+        "fogbugz": "",
+        "checkItems": 0,
+        "checkItemsChecked": 0,
+        "comments": 0,
+        "attachments": 0,
+        "description": true,
+        "due": null,
+        "dueComplete": false
+      },
+      "checkItemStates": [],
+      "closed": false,
+      "dueComplete": false,
+      "dateLastActivity": "2018-03-17T03:53:45.903Z",
+      "desc":
+        "Perks: None Listed \n \n  Application URL: https://oak.is/hiring/full-stack-engineer/ \n\n  Site URL: https://authenticjobs.com/jobs/30436/full-stack-developer \n\n  Tagline:  \n\n  Keywords: team,writing,product,have,code,products,experience,mdash,your,issues,interested,designers,developers,vision,execute,familiar,restful,development,software,modern,strong,javascript,react,closely,right,stack,york,make,work,about \n\n  Location: Brooklyn, NY, US \n\n  Relocation Assistance? No \n\n  Remote? No \n",
+      "descData": null,
+      "due": null,
+      "email": null,
+      "idBoard": "5aac9146c2c0a32fb687902a",
+      "idChecklists": [],
+      "idList": "5aac9149a6e5ec8807972e57",
+      "idMembers": [],
+      "idMembersVoted": [],
+      "idShort": 1,
+      "idAttachmentCover": null,
+      "labels": [],
+      "limits": {
+        "attachments": {
+          "perCard": { "status": "ok", "disableAt": 950, "warnAt": 900 }
+        },
+        "checklists": {
+          "perCard": { "status": "ok", "disableAt": 475, "warnAt": 450 }
+        },
+        "stickers": {
+          "perCard": { "status": "ok", "disableAt": 67, "warnAt": 63 }
+        }
+      },
+      "idLabels": [],
+      "manualCoverAttachment": false,
+      "name": "oak: Full Stack Developer\n        ",
+      "pos": 16384,
+      "shortLink": "jbDvkyE9",
+      "shortUrl": "https://trello.com/c/jbDvkyE9",
+      "subscribed": false,
+      "url": "https://trello.com/c/jbDvkyE9/1-oak-full-stack-developer"
+    },
+    {
+      "id": "5aac906a407425e23f8566ba",
+      "badges": {
+        "votes": 0,
+        "attachmentsByType": { "trello": { "board": 0, "card": 0 } },
+        "viewingMemberVoted": false,
+        "subscribed": false,
+        "fogbugz": "",
+        "checkItems": 0,
+        "checkItemsChecked": 0,
+        "comments": 0,
+        "attachments": 0,
+        "description": true,
+        "due": null,
+        "dueComplete": false
+      },
+      "checkItemStates": [],
+      "closed": false,
+      "dueComplete": false,
+      "dateLastActivity": "2018-03-17T03:50:02.818Z",
+      "desc":
+        "Perks: - Health and dental insurance\n- Gym membership\n- Your choice of equipment and software\n- Flexible working hours\n- Unmetered vacation \n \n  Application URL: https://oak.is/hiring/ruby-developer/ \n\n  Site URL: https://authenticjobs.com/jobs/30435/backend-developer-ruby \n\n  Tagline:  \n\n  Keywords: product,writing,team,your,experience,code,mdash,have,products,developers,software,development,restful,interested,designers,backend,vision,execute,about,modern,javascript,react,familiar,working,issues,strong,closely,make,work,ruby \n\n  Location: Brooklyn, NY, US \n\n  Relocation Assistance? No \n\n  Remote? No \n",
+      "descData": null,
+      "due": null,
+      "email": null,
+      "idBoard": "5aac905c980b3b6ef1ff76ed",
+      "idChecklists": [],
+      "idList": "5aac906aee2f917a5c85e55e",
+      "idMembers": [],
+      "idMembersVoted": [],
+      "idShort": 3,
+      "idAttachmentCover": null,
+      "labels": [],
+      "limits": {
+        "attachments": {
+          "perCard": { "status": "ok", "disableAt": 950, "warnAt": 900 }
+        },
+        "checklists": {
+          "perCard": { "status": "ok", "disableAt": 475, "warnAt": 450 }
+        },
+        "stickers": {
+          "perCard": { "status": "ok", "disableAt": 67, "warnAt": 63 }
+        }
+      },
+      "idLabels": [],
+      "manualCoverAttachment": false,
+      "name": "oak: Backend Developer (Ruby)\n        ",
+      "pos": 16384,
+      "shortLink": "cxWd7dl9",
+      "shortUrl": "https://trello.com/c/cxWd7dl9",
+      "subscribed": false,
+      "url": "https://trello.com/c/cxWd7dl9/3-oak-backend-developer-ruby"
+    },
+    {
+      "id": "5aac914a88661443c214a08c",
+      "badges": {
+        "votes": 0,
+        "attachmentsByType": { "trello": { "board": 0, "card": 0 } },
+        "viewingMemberVoted": false,
+        "subscribed": false,
+        "fogbugz": "",
+        "checkItems": 0,
+        "checkItemsChecked": 0,
+        "comments": 0,
+        "attachments": 0,
+        "description": true,
+        "due": null,
+        "dueComplete": false
+      },
+      "checkItemStates": [],
+      "closed": false,
+      "dueComplete": false,
+      "dateLastActivity": "2018-03-17T03:53:46.018Z",
+      "desc":
+        "Perks: - Health and dental insurance\n- Gym membership\n- Your choice of equipment and software\n- Flexible working hours\n- Unmetered vacation \n \n  Application URL: https://oak.is/hiring/ruby-developer/ \n\n  Site URL: https://authenticjobs.com/jobs/30435/backend-developer-ruby \n\n  Tagline:  \n\n  Keywords: product,writing,team,your,experience,code,mdash,have,products,developers,software,development,restful,interested,designers,backend,vision,execute,about,modern,javascript,react,familiar,working,issues,strong,closely,make,work,ruby \n\n  Location: Brooklyn, NY, US \n\n  Relocation Assistance? No \n\n  Remote? No \n",
+      "descData": null,
+      "due": null,
+      "email": null,
+      "idBoard": "5aac9146c2c0a32fb687902a",
+      "idChecklists": [],
+      "idList": "5aac9149cad74347445bc727",
+      "idMembers": [],
+      "idMembersVoted": [],
+      "idShort": 3,
+      "idAttachmentCover": null,
+      "labels": [],
+      "limits": {
+        "attachments": {
+          "perCard": { "status": "ok", "disableAt": 950, "warnAt": 900 }
+        },
+        "checklists": {
+          "perCard": { "status": "ok", "disableAt": 475, "warnAt": 450 }
+        },
+        "stickers": {
+          "perCard": { "status": "ok", "disableAt": 67, "warnAt": 63 }
+        }
+      },
+      "idLabels": [],
+      "manualCoverAttachment": false,
+      "name": "oak: Backend Developer (Ruby)\n        ",
+      "pos": 16384,
+      "shortLink": "icKGEvXK",
+      "shortUrl": "https://trello.com/c/icKGEvXK",
+      "subscribed": false,
+      "url": "https://trello.com/c/icKGEvXK/3-oak-backend-developer-ruby"
+    }
+  ],
+  "organizations": [],
+  "members": []
+}
