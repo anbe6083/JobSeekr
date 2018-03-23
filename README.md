@@ -7,4 +7,4 @@ This application creates a dynamic Trello board, with Lists of the locations of 
 
 Each card Has all of the information you need to conduct an efficient job search. 
 
-Created using: JavaScript, Node.js, Express, Authentic Jobs API, Trello API
+**Created using: JavaScript, Node.js, Express, Authentic Jobs API, Trello API**
