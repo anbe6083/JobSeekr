@@ -1,7 +1,7 @@
 # JobSeekr
 
 ## Organize and Simplify your job search!
-![](https://i.imgur.com/5Xyb4YS.gif)
+![](https://imgur.com/a/BQTJF.gif)
 
 This application creates a dynamic Trello board, with Lists of the locations of where you're conducting your job search. 
 
