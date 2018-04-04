@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "chart.js": "^2.7.2",
     "keymirror": "^0.1.1",
     "react": "^16.2.0",
+    "react-chartjs": "^1.2.0",
+    "react-chartjs-2": "^2.7.0",
+    "react-dazzle": "^1.4.0",
     "react-dom": "^16.2.0",
     "react-materialize": "^2.1.4",
     "react-redux": "^5.0.7",
