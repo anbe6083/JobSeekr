@@ -38,9 +38,13 @@ class DoughnutChart extends Component {
       <div>
         <Doughnut
           data={this.state.data}
-          options={{ animationEasing: 'easeInSine', showTooltips: true }}
-          height="200"
-          width="350"
+          options={{
+            animationEasing: 'easeInSine',
+            showTooltips: true,
+            height: '100px'
+          }}
+          height={25}
+          width={100}
         />
       </div>
     );

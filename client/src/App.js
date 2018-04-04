@@ -5,7 +5,7 @@ import Dashboard from 'react-dazzle';
 
 // Your widget. Just another react component.
 import DoughnutChart from './components/widgets/DoughnutChart';
-
+import BarChart from './components/widgets/Bar';
 // Default styles.
 import 'react-dazzle/lib/style/style.css';
 
@@ -18,7 +18,11 @@ class App extends Component {
       widgets: {
         DoughnutChart: {
           type: DoughnutChart,
-          title: 'Doughnut Chart'
+          title: 'Applications'
+        },
+        BarChart: {
+          type: BarChart,
+          title: 'Bar'
         }
       },
       layout: {
@@ -28,6 +32,10 @@ class App extends Component {
               {
                 className: 'col-md-12',
                 widgets: [{ key: 'DoughnutChart' }]
+              },
+              {
+                className: 'col-md-6',
+                widgets: [{ key: 'BarChart' }]
               }
             ]
           }
