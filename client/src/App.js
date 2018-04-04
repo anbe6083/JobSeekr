@@ -11,6 +11,8 @@ import CompanyBar from './components/widgets/CompanyBar';
 import 'react-dazzle/lib/style/style.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
 import { SideNav, SideNavItem, Button } from 'react-materialize';
 
 class App extends Component {
@@ -61,7 +63,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Dashboard widgets={this.state.widgets} layout={this.state.layout} />
+        <Router>
+          <Route
+            exact
+            path="/"
+            component={() => (
+              <Dashboard
+                widgets={this.state.widgets}
+                layout={this.state.layout}
+              />
+            )}
+          />
+        </Router>
+
         {/* <SideNav
           trigger={<Button>SIDE NAV DEMO</Button>}
           options={{ closeOnClick: true }}

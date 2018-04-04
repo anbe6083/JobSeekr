@@ -19,8 +19,8 @@ export default class BarChart extends Component {
           },
           {
             label: '# of Responses',
-            backgroundColor: '#F5DD90',
-            borderColor: '#F5DD90',
+            backgroundColor: '#CEB45C',
+            borderColor: '#CEB45C',
             borderWidth: 1,
             hoverBackgroundColor: '#F5DD90',
             hoverBorderColor: '#F5DD90',
