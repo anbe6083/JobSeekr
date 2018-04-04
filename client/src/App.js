@@ -6,8 +6,10 @@ import Dashboard from 'react-dazzle';
 // Your widget. Just another react component.
 import DoughnutChart from './components/widgets/DoughnutChart';
 import BarChart from './components/widgets/Bar';
+import CompanyBar from './components/widgets/CompanyBar';
 // Default styles.
 import 'react-dazzle/lib/style/style.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 import { SideNav, SideNavItem, Button } from 'react-materialize';
 
@@ -23,6 +25,10 @@ class App extends Component {
         BarChart: {
           type: BarChart,
           title: 'Bar'
+        },
+        CompanyBar: {
+          type: CompanyBar,
+          title: "Companies I'm Networking With"
         }
       },
       layout: {
@@ -32,10 +38,18 @@ class App extends Component {
               {
                 className: 'col-md-12',
                 widgets: [{ key: 'DoughnutChart' }]
-              },
+              }
+            ]
+          },
+          {
+            columns: [
               {
                 className: 'col-md-6',
                 widgets: [{ key: 'BarChart' }]
+              },
+              {
+                className: 'col-md-6',
+                widgets: [{ key: 'CompanyBar' }]
               }
             ]
           }
