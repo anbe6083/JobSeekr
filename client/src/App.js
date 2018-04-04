@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Dashboard from 'react-dazzle';
-
+import CompanyTree from './components/widgets/CompanyTree';
 // Your widget. Just another react component.
 import DoughnutChart from './components/widgets/DoughnutChart';
 import BarChart from './components/widgets/Bar';
@@ -63,22 +63,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Router>
-          <Route
-            exact
-            path="/"
-            component={() => (
-              <Dashboard
-                widgets={this.state.widgets}
-                layout={this.state.layout}
-              />
-            )}
-          />
-        </Router>
-
-        {/* <SideNav
-          trigger={<Button>SIDE NAV DEMO</Button>}
+        <SideNav
+          trigger={<Button>Menu</Button>}
           options={{ closeOnClick: true }}
+          className="offset-s1"
         >
           <SideNavItem
             userView
@@ -89,13 +77,34 @@ class App extends Component {
               email: 'jdandturk@gmail.com'
             }}
           />
-          <SideNavItem href="#!icon" icon="cloud">
+          <SideNavItem href="/" icon="cloud">
             Dashboard
           </SideNavItem>
-          <SideNavItem href="#!second">Companies I'm Interested In</SideNavItem>
-          <SideNavItem href="#!second">People I've Networked With</SideNavItem>
-          <SideNavItem href="#!third">Application Statuses</SideNavItem>
-        </SideNav> */}
+          <SideNavItem href="#!second" icon="people">
+            Companies
+          </SideNavItem>
+          <SideNavItem href="#!second" icon="comment">
+            People I'm Speaking To
+          </SideNavItem>
+          <SideNavItem href="#!third" icon="drafts">
+            Applications Sent
+          </SideNavItem>
+        </SideNav>
+        <Router>
+          <div>
+            <Route
+              exact
+              path="/"
+              component={() => (
+                <Dashboard
+                  widgets={this.state.widgets}
+                  layout={this.state.layout}
+                />
+              )}
+            />
+            <Route path="/companies" component={() => <CompanyTree />} />
+          </div>
+        </Router>
       </div>
     );
   }
