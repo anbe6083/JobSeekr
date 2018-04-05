@@ -7,15 +7,18 @@ class CompanyTree extends Component {
     this.state = {
       myTreeData: [
         {
-          name: 'John Doe',
-          attributes: {
-            Title: 'CEO',
-            Email: 'johndoe@company.com',
-            'Phone Number': '111-222-3333',
-            LinkedIn: 'http://linkedin.com/fake',
-            'Last Contacted': '11/2/2017'
-          },
+          name: 'Company',
           children: [
+            {
+              name: 'John Doe',
+              attributes: {
+                Title: 'CEO',
+                Email: 'johndoe@company.com',
+                'Phone Number': '111-222-4444',
+                LinkedIn: 'http://linkedin.com/fake',
+                'Last Contacted': '11/2/2017'
+              }
+            },
             {
               name: 'Jane Doe',
               attributes: {
@@ -34,7 +37,29 @@ class CompanyTree extends Component {
                 'Phone Number': '111-222-4444',
                 LinkedIn: 'http://linkedin.com/fake',
                 'Last Contacted': '12/22/2017'
-              }
+              },
+              children: [
+                {
+                  name: 'John Moe',
+                  attributes: {
+                    Title: 'Software Engineer',
+                    Email: 'johnmoe@company.com',
+                    'Phone Number': '111-222-4444',
+                    LinkedIn: 'http://linkedin.com/fake',
+                    'Last Contacted': '11/2/2017'
+                  }
+                },
+                {
+                  name: 'Jane Moe',
+                  attributes: {
+                    Title: 'Senior Software Engineer',
+                    Email: 'janemoe@company.com',
+                    'Phone Number': '111-222-4444',
+                    LinkedIn: 'http://linkedin.com/fake',
+                    'Last Contacted': '11/2/2017'
+                  }
+                }
+              ]
             }
           ]
         }
@@ -44,8 +69,16 @@ class CompanyTree extends Component {
 
   render() {
     return (
-      <div id="treeWrapper" style={{ width: '50em', height: '20em' }}>
-        <Tree data={this.state.myTreeData} orientation={'vertical'} />
+      <div
+        id="treeWrapper"
+        style={{ height: '1000px', alpha: '0.5', spacing: '12' }}
+      >
+        <Tree
+          data={this.state.myTreeData}
+          orientation={'vertical'}
+          separation={{ siblings: 3, nonsiblings: 2 }}
+          collapsible={true}
+        />
       </div>
     );
   }

@@ -7,6 +7,7 @@ import CompanyTree from './components/widgets/CompanyTree';
 import DoughnutChart from './components/widgets/DoughnutChart';
 import BarChart from './components/widgets/Bar';
 import CompanyBar from './components/widgets/CompanyBar';
+import People_Cards from './components/People_Cards';
 // Default styles.
 import 'react-dazzle/lib/style/style.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -80,10 +81,10 @@ class App extends Component {
           <SideNavItem href="/" icon="cloud">
             Dashboard
           </SideNavItem>
-          <SideNavItem href="#!second" icon="people">
+          <SideNavItem href="/companies" icon="people">
             Companies
           </SideNavItem>
-          <SideNavItem href="#!second" icon="comment">
+          <SideNavItem href="/people" icon="comment">
             People I'm Speaking To
           </SideNavItem>
           <SideNavItem href="#!third" icon="drafts">
@@ -103,6 +104,7 @@ class App extends Component {
               )}
             />
             <Route path="/companies" component={() => <CompanyTree />} />
+            <Route path="/people" component={() => <People_Cards />} />
           </div>
         </Router>
       </div>
