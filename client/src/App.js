@@ -8,6 +8,7 @@ import DoughnutChart from './components/widgets/DoughnutChart';
 import BarChart from './components/widgets/Bar';
 import CompanyBar from './components/widgets/CompanyBar';
 import People_Cards from './components/People_Cards';
+import NavBar from './components/NavBar';
 // Default styles.
 import 'react-dazzle/lib/style/style.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -64,33 +65,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <SideNav
-          trigger={<Button>Menu</Button>}
-          options={{ closeOnClick: true }}
-          className="offset-s1"
-        >
-          <SideNavItem
-            userView
-            user={{
-              background: 'img/office.jpg',
-              image: 'img/yuna.jpg',
-              name: 'John Doe',
-              email: 'jdandturk@gmail.com'
-            }}
-          />
-          <SideNavItem href="/" icon="cloud">
-            Dashboard
-          </SideNavItem>
-          <SideNavItem href="/companies" icon="people">
-            Companies
-          </SideNavItem>
-          <SideNavItem href="/people" icon="comment">
-            People I'm Speaking To
-          </SideNavItem>
-          <SideNavItem href="#!third" icon="drafts">
-            Applications Sent
-          </SideNavItem>
-        </SideNav>
+        <NavBar />
+        <br />
         <Router>
           <div>
             <Route
