@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import User_Dashboard from './components/User_Dashboard';
 import CompanyTree from './components/widgets/CompanyTree';
-import People_Cards from './components/People_Cards';
+import NetworkList from './components/NetworkList';
 import NavBar from './components/NavBar';
 // Default styles.
 import 'react-dazzle/lib/style/style.css';
@@ -27,7 +27,7 @@ class App extends Component {
           <div>
             <Route exact path="/" component={() => <User_Dashboard />} />
             <Route path="/companies" component={() => <CompanyTree />} />
-            <Route path="/people" component={() => <People_Cards />} />
+            <Route path="/people" component={() => <NetworkList />} />
           </div>
         </Router>
       </div>
