@@ -5,7 +5,11 @@ export default class NavBar extends Component {
     return (
       <div>
         <SideNav
-          trigger={<Button>Menu</Button>}
+          trigger={
+            <Button className="left">
+              <i className="material-icons">arrow_right</i>
+            </Button>
+          }
           options={{ closeOnClick: true }}
           className="offset-s1"
         >
