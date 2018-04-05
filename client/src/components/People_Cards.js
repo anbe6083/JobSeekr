@@ -3,6 +3,18 @@ import { Card, CardTitle, Button, Modal, Row, Input } from 'react-materialize';
 class People_Cards extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      myNetwork: [
+        {
+          name: 'Software Engineer',
+          position: 'CTO',
+          linkedinUrl: 'http://www.linkedin.com/fake',
+          phoneNumber: '661-111-2222',
+          lastContactDate: '11/22/2017'
+        }
+      ]
+    };
   }
 
   render() {
@@ -59,32 +71,37 @@ class People_Cards extends Component {
 
         <br />
         <br />
-        <Card
-          header={
-            <CardTitle
-              reveal
-              image={require('../icons/businessman.png')}
-              waves="light"
-            />
-          }
-          title="Joe Doe"
-          reveal={
-            <p>
-              Position: Software Engineer
-              <br />
-              LinkedIn: 'http://www.linkedin.com/fake'
-              <br />
-              Phone Number: 661-111-2222
-              <br />
-              Last Contacted: 11/22/2017
-            </p>
-          }
-          style={cardStyle}
-        >
-          <p>
-            <a href="http://www.linkedin.com/fake">LinkedIn</a>
-          </p>
-        </Card>
+        {this.state.myNetwork.map(person => {
+          return (
+            <Card
+              id={person.name}
+              header={
+                <CardTitle
+                  reveal
+                  image={require('../icons/businessman.png')}
+                  waves="light"
+                />
+              }
+              title="Joe Doe"
+              reveal={
+                <p>
+                  Position: {person.position}
+                  <br />
+                  LinkedIn: {person.linkedinUrl}
+                  <br />
+                  Phone Number: {person.phoneNumber}
+                  <br />
+                  Last Contacted: {person.lastContactDate}
+                </p>
+              }
+              style={cardStyle}
+            >
+              <p>
+                <a href={person.linkedinUrl}>LinkedIn</a>
+              </p>
+            </Card>
+          );
+        })}
       </div>
     );
   }

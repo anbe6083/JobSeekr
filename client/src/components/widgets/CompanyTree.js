@@ -73,6 +73,7 @@ class CompanyTree extends Component {
         id="treeWrapper"
         style={{ height: '1000px', alpha: '0.5', spacing: '12' }}
       >
+        <h1> Company Tree </h1>
         <Tree
           data={this.state.myTreeData}
           orientation={'vertical'}
