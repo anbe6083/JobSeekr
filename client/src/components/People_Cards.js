@@ -13,9 +13,15 @@ class People_Cards extends Component {
     };
     return (
       <div>
+        <h1>Connections</h1>
         <Modal
           header="Modal Header"
-          trigger={<Button waves="light">Add a New Connection</Button>}
+          trigger={
+            <Button waves="light">
+              Add a New Connection
+              <i className="material-icons">person_add</i>
+            </Button>
+          }
         >
           <Row>
             <Input placeholder="First Name" s={6} label="First Name" />

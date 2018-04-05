@@ -7,7 +7,7 @@ export default class NavBar extends Component {
         <SideNav
           trigger={
             <Button className="left">
-              <i className="material-icons">arrow_right</i>
+              <i className="large material-icons">arrow_right</i>
             </Button>
           }
           options={{ closeOnClick: true }}
