@@ -5,7 +5,10 @@ import LastNameForm from './LastNameForm';
 import LinkedInForm from './LinkedInForm';
 import EmailForm from './EmailForm';
 import DatePickerForm from './DatePickerForm';
-export default class NewContact extends Component {
+import { addNewNetworkConnection } from '../actions/networkActions';
+//react-redux
+import { connect } from 'react-redux';
+class NewContact extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,6 +18,12 @@ export default class NewContact extends Component {
       email: '',
       date: ''
     };
+
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({ firstName: e.target.value });
   }
 
   render() {
@@ -30,31 +39,18 @@ export default class NewContact extends Component {
           }
         >
           <Row>
-            <FirstNameForm />
-            <LastNameForm />
+            <FirstNameForm
+              firstName={this.state.firstName}
+              onFirstNameChange={this.onChange}
+            />
+            <LastNameForm lastName={this.state.lastName} />
           </Row>
           <Row>
-            <LinkedInForm />
-            <EmailForm />
+            <LinkedInForm linkedInUrl={this.state.linkedInUrl} />
+            <EmailForm email={this.state.email} />
           </Row>
           <label>Date Contacted:</label>
           <Row>
-            {/* <Input
-              name="date"
-              type="date"
-              onClick={() => (
-                <Modal>
-                  {' '}
-                  <Input
-                    name="on"
-                    type="date"
-                    onChange={function(e, value) {
-                      alert(e);
-                    }}
-                  />
-                </Modal>
-              )}
-            /> */}
             <DatePickerForm />
           </Row>
           <Button
@@ -69,3 +65,15 @@ export default class NewContact extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  myNetwork: addNewNetworkConnection(state.myNetwork, this.state);
+};
+
+const mapDispatchToProps = dispatch => {
+  {
+    addNewNetworkConnection: dispatch(addNewNetworkConnection(this.state));
+  }
+};
+
+export default connect()(NewContact);

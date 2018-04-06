@@ -13,26 +13,40 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import { SideNav, SideNavItem, Button } from 'react-materialize';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <NavBar />
-        <br />
-        <Router>
-          <div>
-            <Route exact path="/" component={() => <User_Dashboard />} />
-            <Route path="/companies" component={() => <CompanyTree />} />
-            <Route path="/people" component={() => <NetworkList />} />
-          </div>
-        </Router>
+const App = () => (
+  <div className="App">
+    <NavBar />
+    <br />
+    <Router>
+      <div>
+        <Route exact path="/" component={() => <User_Dashboard />} />
+        <Route path="/companies" component={() => <CompanyTree />} />
+        <Route path="/people" component={() => <NetworkList />} />
       </div>
-    );
-  }
-}
+    </Router>
+  </div>
+);
+
+// class App extends Component {
+//   constructor(props) {
+//     super(props);
+//   }
+
+//   render() {
+//     return (
+//       <div className="App">
+//         <NavBar />
+//         <br />
+//         <Router>
+//           <div>
+//             <Route exact path="/" component={() => <User_Dashboard />} />
+//             <Route path="/companies" component={() => <CompanyTree />} />
+//             <Route path="/people" component={() => <NetworkList />} />
+//           </div>
+//         </Router>
+//       </div>
+//     );
+//   }
+// }
 
 export default App;
