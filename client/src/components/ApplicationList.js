@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Table } from 'react-materialize';
-
+import { Table, Button } from 'react-materialize';
+import NewApplication from './NewApplication';
 export default class ApplicationList extends Component {
   constructor(props) {
     super(props);
@@ -8,33 +8,47 @@ export default class ApplicationList extends Component {
 
   render() {
     return (
-      <Table>
-        <thead>
-          <tr>
-            <th data-field="id">Name</th>
-            <th data-field="name">Item Name</th>
-            <th data-field="price">Item Price</th>
-          </tr>
-        </thead>
+      <div>
+        <h1>My Applications</h1>
+        <Table responsive={true} centered={true} hoverable={true}>
+          <thead>
+            <tr>
+              <th data-field="company">Company</th>
+              <th data-field="position">Position</th>
+              <th data-field="name">Date Submitted</th>
+              <th data-field="appUrl">Application URL</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-          </tr>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-          </tr>
-          <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-          </tr>
-        </tbody>
-      </Table>
+          <tbody>
+            <tr>
+              <td>Facebook</td>
+              <td>Software Engineer</td>
+              <td>12/11/2018</td>
+              <td>
+                <a href="https://www.facebook.com/careers/">Job Listing</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Twitter</td>
+              <td>Software Engineer</td>
+              <td>5/11/2018</td>
+              <td>
+                <a href="https://careers.twitter.com/en.html">Job Listing</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Microsoft</td>
+              <td>Software Engineer</td>
+              <td>12/19/2011</td>
+              <td>
+                <a href="https://careers.microsoft.com/us/en/">Job Listing</a>
+              </td>
+            </tr>
+          </tbody>
+          <NewApplication />
+        </Table>
+      </div>
     );
   }
 }

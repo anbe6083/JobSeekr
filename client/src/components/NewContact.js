@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 import { Card, CardTitle, Button, Modal, Row, Input } from 'react-materialize';
-import FirstNameForm from './FirstNameForm';
-import LastNameForm from './LastNameForm';
-import LinkedInForm from './LinkedInForm';
-import EmailForm from './EmailForm';
-import DatePickerForm from './DatePickerForm';
 import { addNewNetworkConnection } from '../actions/networkActions';
 //react-redux
 import { connect } from 'react-redux';
@@ -21,33 +16,24 @@ class NewContact extends Component {
       email: '',
       date: ''
     };
-
-    this.onFirstNameChange = this.onFirstNameChange.bind(this);
-    this.onLastNameChange = this.onLastNameChange.bind(this);
-    this.onLinkedinChange = this.onLinkedinChange.bind(this);
-    this.onEmailChange = this.onEmailChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
-
-  onFirstNameChange(e) {
-    this.setState({ firstName: e.target.value });
-  }
-
-  onLastNameChange(e) {
-    this.setState({ lastName: e.target.value });
-  }
-
-  onLinkedinChange(e) {
-    this.setState({ linkedInUrl: e.target.value });
-  }
-
-  onEmailChange(e) {
-    this.setState({ email: e.target.value });
+  onChange(e) {
+    console.log(e.target.value);
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   onSubmit(e) {
     e.preventDefault();
     this.props.addNewNetworkConnection(this.state);
+    this.setState({
+      firstName: '',
+      lastName: '',
+      linkedInUrl: '',
+      email: '',
+      date: ''
+    });
   }
 
   render() {
@@ -64,28 +50,36 @@ class NewContact extends Component {
         >
           <form onSubmit={this.onSubmit}>
             <Row>
-              <FirstNameForm
-                firstName={this.state.firstName}
-                onFirstNameChange={this.onFirstNameChange}
+              <Input
+                placeholder="First Name"
+                s={6}
+                label="First Name"
+                onChange={this.onChange}
+                name="firstName"
               />
-              <LastNameForm
-                lastName={this.state.lastName}
-                onLastNameChange={this.onLastNameChange}
+              <Input
+                placeholder="Last Name"
+                s={6}
+                label="Last Name"
+                onChange={this.onChange}
+                name="lastName"
               />
             </Row>
             <Row>
-              <LinkedInForm
-                linkedInUrl={this.state.linkedInUrl}
-                onLinkedinChange={this.onLinkedinChange}
+              <Input
+                placeholder="LinkedIn URL"
+                s={6}
+                label="LinkedIn URL"
+                onChange={this.onChange}
+                name="linkedInUrl"
               />
-              <EmailForm
-                email={this.state.email}
-                onEmailChange={this.onEmailChange}
+              <Input
+                placeholder="Email"
+                s={6}
+                label="Email"
+                onChange={this.onChange}
+                name="email"
               />
-            </Row>
-            <label>Date Contacted:</label>
-            <Row>
-              <DatePickerForm />
             </Row>
             <Button
               className="btn waves-effect waves-light"

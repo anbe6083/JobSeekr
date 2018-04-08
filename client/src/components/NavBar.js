@@ -31,7 +31,7 @@ export default class NavBar extends Component {
           <SideNavItem href="/people" icon="comment">
             People I'm Speaking To
           </SideNavItem>
-          <SideNavItem href="#!third" icon="drafts">
+          <SideNavItem href="/applications" icon="drafts">
             Applications Sent
           </SideNavItem>
         </SideNav>
