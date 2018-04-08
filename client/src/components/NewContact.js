@@ -26,6 +26,7 @@ class NewContact extends Component {
     this.onLastNameChange = this.onLastNameChange.bind(this);
     this.onLinkedinChange = this.onLinkedinChange.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onFirstNameChange(e) {
@@ -44,6 +45,11 @@ class NewContact extends Component {
     this.setState({ email: e.target.value });
   }
 
+  onSubmit(e) {
+    e.preventDefault();
+    this.props.addNewNetworkConnection(this.state);
+  }
+
   render() {
     return (
       <div>
@@ -56,12 +62,7 @@ class NewContact extends Component {
             </Button>
           }
         >
-          <form
-            onSubmit={e => {
-              e.preventDefault();
-              this.props.addNewNetworkConnection(this.state);
-            }}
-          >
+          <form onSubmit={this.onSubmit}>
             <Row>
               <FirstNameForm
                 firstName={this.state.firstName}
