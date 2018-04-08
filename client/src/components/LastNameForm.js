@@ -12,6 +12,7 @@ export default class LastNameForm extends Component {
 
   onChange(e) {
     this.setState({ lastName: e.target.value });
+    this.props.onLastNameChange(e);
   }
 
   render() {

@@ -12,6 +12,7 @@ export default class EmailForm extends Component {
 
   onChange(e) {
     this.setState({ email: e.target.value });
+    this.props.onEmailChange(e);
   }
 
   render() {

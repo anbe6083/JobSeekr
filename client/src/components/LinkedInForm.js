@@ -12,6 +12,7 @@ export default class LinkedInForm extends Component {
 
   onChange(e) {
     this.setState({ linkedinUrl: e.target.value });
+    this.props.onLinkedinChange(e);
   }
 
   render() {

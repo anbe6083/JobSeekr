@@ -8,6 +8,9 @@ import DatePickerForm from './DatePickerForm';
 import { addNewNetworkConnection } from '../actions/networkActions';
 //react-redux
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+// const NewContact = ({dispatch}) => {
+
 class NewContact extends Component {
   constructor(props) {
     super(props);
@@ -19,11 +22,26 @@ class NewContact extends Component {
       date: ''
     };
 
-    this.onChange = this.onChange.bind(this);
+    this.onFirstNameChange = this.onFirstNameChange.bind(this);
+    this.onLastNameChange = this.onLastNameChange.bind(this);
+    this.onLinkedinChange = this.onLinkedinChange.bind(this);
+    this.onEmailChange = this.onEmailChange.bind(this);
   }
 
-  onChange(e) {
+  onFirstNameChange(e) {
     this.setState({ firstName: e.target.value });
+  }
+
+  onLastNameChange(e) {
+    this.setState({ lastName: e.target.value });
+  }
+
+  onLinkedinChange(e) {
+    this.setState({ linkedInUrl: e.target.value });
+  }
+
+  onEmailChange(e) {
+    this.setState({ email: e.target.value });
   }
 
   render() {
@@ -38,42 +56,61 @@ class NewContact extends Component {
             </Button>
           }
         >
-          <Row>
-            <FirstNameForm
-              firstName={this.state.firstName}
-              onFirstNameChange={this.onChange}
-            />
-            <LastNameForm lastName={this.state.lastName} />
-          </Row>
-          <Row>
-            <LinkedInForm linkedInUrl={this.state.linkedInUrl} />
-            <EmailForm email={this.state.email} />
-          </Row>
-          <label>Date Contacted:</label>
-          <Row>
-            <DatePickerForm />
-          </Row>
-          <Button
-            className="btn waves-effect waves-light"
-            type="submit"
-            name="action"
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              this.props.addNewNetworkConnection(this.state);
+            }}
           >
-            Submit
-          </Button>
+            <Row>
+              <FirstNameForm
+                firstName={this.state.firstName}
+                onFirstNameChange={this.onFirstNameChange}
+              />
+              <LastNameForm
+                lastName={this.state.lastName}
+                onLastNameChange={this.onLastNameChange}
+              />
+            </Row>
+            <Row>
+              <LinkedInForm
+                linkedInUrl={this.state.linkedInUrl}
+                onLinkedinChange={this.onLinkedinChange}
+              />
+              <EmailForm
+                email={this.state.email}
+                onEmailChange={this.onEmailChange}
+              />
+            </Row>
+            <label>Date Contacted:</label>
+            <Row>
+              <DatePickerForm />
+            </Row>
+            <Button
+              className="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+            >
+              Submit
+            </Button>
+          </form>
         </Modal>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  myNetwork: addNewNetworkConnection(state.myNetwork, this.state);
-};
+function mapStateToProps(state) {
+  return {
+    newContact: state
+  };
+}
 
 const mapDispatchToProps = dispatch => {
-  {
-    addNewNetworkConnection: dispatch(addNewNetworkConnection(this.state));
-  }
+  return bindActionCreators(
+    { addNewNetworkConnection: addNewNetworkConnection },
+    dispatch
+  );
 };
 
-export default connect()(NewContact);
+export default connect(mapStateToProps, mapDispatchToProps)(NewContact);

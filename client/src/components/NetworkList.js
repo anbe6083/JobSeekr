@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { Card, CardTitle, Button, Modal, Row, Input } from 'react-materialize';
 import NewContact from './NewContact';
+//react-redux
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import networkActions, {
+  addNewNetworkConnection
+} from '../actions/networkActions';
+
 const cardStyle = {
   // 'max-height': '200px'
   height: '50%',
@@ -42,7 +48,6 @@ class NetworkList extends Component {
       height: '50%',
       width: '50%'
     };
-    console.log(this.props);
     return (
       <div>
         <h1>Connections</h1>
@@ -50,17 +55,18 @@ class NetworkList extends Component {
         <br />
         <br />
         {this.props.myNetwork.map(person => {
+          console.log(person);
           return (
             <Card
               id={person.name}
               header={<CardTitle reveal image={person.photo} waves="light" />}
-              title={person.name}
+              title={person.firstName + ' ' + person.lastName}
               reveal={
                 <p>
                   Position: {person.position}
                   <br />
-                  LinkedIn:{' '}
-                  <a href={person.linkedinUrl}>{person.linkedinUrl}</a>
+                  LinkedIn:
+                  <a href={person.linkedInUrl}>{person.linkedInUrl}</a>
                   <br />
                   Phone Number: {person.phoneNumber}
                   <br />
@@ -71,9 +77,7 @@ class NetworkList extends Component {
               }
               style={cardStyle}
             >
-              <p>
-                <a href={person.linkedinUrl}>LinkedIn</a>
-              </p>
+              <a href={person.linkedInUrl}>LinkedIn</a>
             </Card>
           );
         })}
@@ -86,6 +90,14 @@ function mapStateToProps(state) {
   return {
     myNetwork: state.myNetwork
   };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    { addNewNetworkConnection: addNewNetworkConnection },
+    dispatch
+  );
+  addNewNetworkConnection: dispatch;
 }
 
 export default connect(mapStateToProps)(NetworkList);

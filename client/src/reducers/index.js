@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import myNetWorkReducer from './reducers';
+import networkReducers from './networkReducers';
 
 const rootReducer = combineReducers({
-  myNetwork: myNetWorkReducer
+  myNetwork: networkReducers
 });
 
 export default rootReducer;
