@@ -4,7 +4,7 @@ import NewApplication from './NewApplication';
 import { connect } from 'react-redux';
 import { Input } from 'react-materialize';
 import { bindActionCreators } from 'redux';
-
+import { editApplication } from '../actions/applicationActions';
 const tdStyling = {
   cursor: 'pointer'
 };
@@ -65,7 +65,7 @@ class ApplicationList extends Component {
         <tr key={application.applicationId}>
           <td>{application.company}</td>
           <td>{application.position}</td>
-          <td>{application.dateSubmitted.format('DD/MM/YYYY')}</td>
+          <td>{application.dateSubmitted.format('MM/DD/YYYY')}</td>
           <td>
             <a href={application.applicationUrl}>Application URL</a>
           </td>
@@ -76,8 +76,16 @@ class ApplicationList extends Component {
               label="Application Status"
               name="applicationStatus"
               onChange={e => {
-                console.log(e.target.value);
-                application.applicationStatus = e.target.value;
+                this.props.editApplication({
+                  applicationId: application.applicationId,
+                  company: application.company,
+                  position: application.position,
+                  dateSubmitted: application.dateSubmitted,
+                  applicationUrl: application.applicationUrl,
+                  oldApplicationStatus: application.applicationStatus,
+                  newApplicationStatus: e.target.value,
+                  resumeUsed: 'Placeholder'
+                });
               }}
               defaultValue={application.applicationStatus}
             >
@@ -114,11 +122,8 @@ function mapStateToProps(state) {
   return { myApplications: state };
 }
 
-// const mapDispatchToProps = dispatch => {
-//   return bindActionCreators(
-//     { addNewNetworkConnection: addNewNetworkConnection },
-//     dispatch
-//   );
-// };
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ editApplication: editApplication }, dispatch);
+};
 
-export default connect(mapStateToProps)(ApplicationList);
+export default connect(mapStateToProps, mapDispatchToProps)(ApplicationList);

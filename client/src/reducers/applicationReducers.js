@@ -36,13 +36,13 @@ const initialState = [
 ];
 
 const applicationReducer = (state = initialState, action) => {
-  console.log(action.applicationId);
+  console.log(state);
   switch (action.type) {
     case 'ADD_NEW_APPLICATION':
       return [
         ...state,
         {
-          applicationId: action.applicationId,
+          applicationId: action.application.applicationId,
           company: action.application.company,
           position: action.application.position,
           dateSubmitted: action.application.dateSubmitted,
@@ -52,7 +52,20 @@ const applicationReducer = (state = initialState, action) => {
         }
       ];
     case 'EDIT_APPLICATION':
-      return Object.assign([], this.state.find());
+      const index = state.findIndex(
+        application =>
+          application.applicationId === action.application.applicationId
+      );
+      console.log(action.application.newApplicationStatus);
+      return [
+        ...state.slice(0, index),
+        {
+          ...state[index],
+          applicationStatus: action.application.newApplicationStatus,
+          resumeUsed: 'Placeholder'
+        },
+        ...state.slice(index + 1)
+      ];
     default:
       return state;
   }

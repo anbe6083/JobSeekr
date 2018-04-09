@@ -28,7 +28,6 @@ class NewApplication extends Component {
   }
 
   onDateChange(date) {
-    console.log(date._d);
     this.setState({ dateSubmitted: date });
   }
 
@@ -45,7 +44,6 @@ class NewApplication extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <Modal
