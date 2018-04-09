@@ -3,6 +3,7 @@ import { Table, Button } from 'react-materialize';
 import NewApplication from './NewApplication';
 import { connect } from 'react-redux';
 import { Input } from 'react-materialize';
+import { bindActionCreators } from 'redux';
 
 const tdStyling = {
   cursor: 'pointer'
@@ -43,43 +44,49 @@ class ApplicationList extends Component {
   }
 
   populateTableHeader() {
-    return this.state.headers.map(header => {
-      return <th data-field={header.dataField}>{header.headerName}</th>;
-    });
+    return (
+      <thead>
+        <tr>
+          {this.state.headers.map(header => {
+            return (
+              <th key={header.dataField} data-field={header.dataField}>
+                {header.headerName}
+              </th>
+            );
+          })}
+        </tr>
+      </thead>
+    );
   }
 
   populateApplications() {
     return this.props.myApplications.myApplications.map(application => {
       return (
-        <tr>
-          <td contentEditable={true}>{application.company}</td>
-          <td contentEditable={true}>{application.position}</td>
-          <td contentEditable={true}>{application.dateSubmitted}</td>
-          <td contentEditable={true}>
+        <tr key={application.applicationId}>
+          <td>{application.company}</td>
+          <td>{application.position}</td>
+          <td>{application.dateSubmitted.format('DD/MM/YYYY')}</td>
+          <td>
             <a href={application.applicationUrl}>Application URL</a>
           </td>
-          <td
-            style={{ cursor: 'pointer' }}
-            contentEditable={true}
-            onClick={() => {
-              <Input
-                s={12}
-                type="select"
-                label="Application Status"
-                icon="assignment"
-                name="applicationStatus"
-                onChange={this.onChange}
-              >
-                <option value="Applied">Applied</option>
-                <option value="Rejected">Rejected</option>
-                <option value="First Interview">First Interview</option>
-                <option value="Second Interview">Second Interview</option>
-                <option value="Third Interview">Third Interview</option>
-                <option value="Offer">Offer</option>
-              </Input>;
-            }}
-          >
-            {application.applicationStatus}
+          <td>
+            <Input
+              s={12}
+              type="select"
+              label="Application Status"
+              name="applicationStatus"
+              onChange={() => {
+                application.applicationStatus = Input.value;
+              }}
+              defaultValue={application.applicationStatus}
+            >
+              <option value="Applied">Applied</option>
+              <option value="Rejected">Rejected</option>
+              <option value="First Interview">First Interview</option>
+              <option value="Second Interview">Second Interview</option>
+              <option value="Third Interview">Third Interview</option>
+              <option value="Offer">Offer</option>
+            </Input>
           </td>
           <td>{application.resumeUsed}</td>
         </tr>
@@ -88,12 +95,11 @@ class ApplicationList extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <h1>My Applications</h1>
         <Table responsive={true} centered={true} hoverable={true}>
-          <thead>{this.populateTableHeader()}</thead>
+          {this.populateTableHeader()}
 
           <tbody>{this.populateApplications()}</tbody>
         </Table>
@@ -106,5 +112,12 @@ class ApplicationList extends Component {
 function mapStateToProps(state) {
   return { myApplications: state };
 }
+
+// const mapDispatchToProps = dispatch => {
+//   return bindActionCreators(
+//     { addNewNetworkConnection: addNewNetworkConnection },
+//     dispatch
+//   );
+// };
 
 export default connect(mapStateToProps)(ApplicationList);

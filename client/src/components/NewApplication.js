@@ -3,6 +3,10 @@ import { Modal, Button, Input, Row } from 'react-materialize';
 import { connect } from 'react-redux';
 import { addNewApplication } from '../actions/applicationActions';
 import { bindActionCreators } from 'redux';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 class NewApplication extends Component {
   constructor(props) {
@@ -10,15 +14,22 @@ class NewApplication extends Component {
     this.state = {
       company: '',
       position: '',
-      dateSubmitted: '',
+      dateSubmitted: moment(),
       applicationUrl: '',
       applicationStatus: ''
     };
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onDateChange = this.onDateChange.bind(this);
   }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onDateChange(date) {
+    console.log(date._d);
+    this.setState({ dateSubmitted: date });
   }
 
   onSubmit(e) {
@@ -27,13 +38,14 @@ class NewApplication extends Component {
     this.setState({
       company: '',
       position: '',
-      dateSubmitted: '',
+      dateSubmitted: moment(),
       applicationUrl: '',
       applicationStatus: ''
     });
   }
 
   render() {
+    console.log(this.state.dateSubmitted);
     return (
       <div>
         <Modal
@@ -47,6 +59,11 @@ class NewApplication extends Component {
         >
           <form onSubmit={this.onSubmit}>
             <Row>
+              <label>Date Submitted:</label>
+              <DatePicker
+                selected={this.state.dateSubmitted}
+                onChange={this.onDateChange}
+              />
               <Input
                 placeholder="Company"
                 s={6}
@@ -72,24 +89,6 @@ class NewApplication extends Component {
               />
             </Row>
             <Row>
-              <label>Date Submitted:</label>
-              <Input
-                name="date"
-                type="date"
-                onClick={() => (
-                  <Modal>
-                    {' '}
-                    <Input
-                      name="on"
-                      className="datepicker"
-                      type="date"
-                      onChange={function(e, value) {
-                        alert(value);
-                      }}
-                    />
-                  </Modal>
-                )}
-              />
               <Input
                 s={12}
                 type="select"
@@ -131,4 +130,4 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ addNewApplication: addNewApplication }, dispatch);
 };
 
-export default connect(mapDispatchToProps)(NewApplication);
+export default connect(mapStateToProps, mapDispatchToProps)(NewApplication);
