@@ -11,7 +11,8 @@ class NewApplication extends Component {
       company: '',
       position: '',
       dateSubmitted: '',
-      applicationUrl: ''
+      applicationUrl: '',
+      applicationStatus: ''
     };
     this.onChange = this.onChange.bind(this);
   }
@@ -22,6 +23,14 @@ class NewApplication extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+    this.props.addNewApplication(this.state);
+    this.setState({
+      company: '',
+      position: '',
+      dateSubmitted: '',
+      applicationUrl: '',
+      applicationStatus: ''
+    });
   }
 
   render() {
@@ -81,6 +90,21 @@ class NewApplication extends Component {
                   </Modal>
                 )}
               />
+              <Input
+                s={12}
+                type="select"
+                label="Application Status"
+                icon="assignment"
+                name="applicationStatus"
+                onChange={this.onChange}
+              >
+                <option value="Applied">Applied</option>
+                <option value="Rejected">Rejected</option>
+                <option value="First Interview">First Interview</option>
+                <option value="Second Interview">Second Interview</option>
+                <option value="Third Interview">Third Interview</option>
+                <option value="Offer">Offer</option>
+              </Input>
             </Row>
             <Row />
             <Button
@@ -95,6 +119,12 @@ class NewApplication extends Component {
       </div>
     );
   }
+}
+
+function mapStateToProps(state) {
+  return {
+    newApplication: state
+  };
 }
 
 const mapDispatchToProps = dispatch => {

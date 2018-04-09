@@ -1,5 +1,4 @@
 import { ADD_NEW_PERSON_TO_NETWORK } from '../actions/networkActions';
-import { combineReducers } from 'redux';
 
 const initialState = [
   // {

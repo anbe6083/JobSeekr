@@ -1,12 +1,34 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'react-materialize';
 import NewApplication from './NewApplication';
-export default class ApplicationList extends Component {
+import { connect } from 'react-redux';
+class ApplicationList extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      myApplications: []
+    };
+  }
+
+  populateApplications() {
+    return this.props.myApplications.myApplications.map(application => {
+      return (
+        <tr>
+          <td>{application.company}</td>
+          <td>{application.position}</td>
+          <td>{application.dateSubmitted}</td>
+          <td>
+            <a href={application.applicationUrl}>Application URL</a>
+          </td>
+          <td>{application.applicationStatus}</td>
+          <td>{application.resumeUsed}</td>
+        </tr>
+      );
+    });
   }
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <h1>My Applications</h1>
@@ -17,38 +39,21 @@ export default class ApplicationList extends Component {
               <th data-field="position">Position</th>
               <th data-field="name">Date Submitted</th>
               <th data-field="appUrl">Application URL</th>
+              <th data-field="appUrl">Application Status</th>
+              <th data-field="appUrl">Resume Used</th>
             </tr>
           </thead>
 
-          <tbody>
-            <tr>
-              <td>Facebook</td>
-              <td>Software Engineer</td>
-              <td>12/11/2018</td>
-              <td>
-                <a href="https://www.facebook.com/careers/">Job Listing</a>
-              </td>
-            </tr>
-            <tr>
-              <td>Twitter</td>
-              <td>Software Engineer</td>
-              <td>5/11/2018</td>
-              <td>
-                <a href="https://careers.twitter.com/en.html">Job Listing</a>
-              </td>
-            </tr>
-            <tr>
-              <td>Microsoft</td>
-              <td>Software Engineer</td>
-              <td>12/19/2011</td>
-              <td>
-                <a href="https://careers.microsoft.com/us/en/">Job Listing</a>
-              </td>
-            </tr>
-          </tbody>
-          <NewApplication />
+          <tbody>{this.populateApplications()}</tbody>
         </Table>
+        <NewApplication />
       </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return { myApplications: state };
+}
+
+export default connect(mapStateToProps)(ApplicationList);

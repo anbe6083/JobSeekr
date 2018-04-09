@@ -48,6 +48,7 @@ class NetworkList extends Component {
       height: '50%',
       width: '50%'
     };
+    console.log(this.props);
     return (
       <div>
         <h1>Connections</h1>
