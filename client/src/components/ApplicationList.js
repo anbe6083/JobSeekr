@@ -75,8 +75,9 @@ class ApplicationList extends Component {
               type="select"
               label="Application Status"
               name="applicationStatus"
-              onChange={() => {
-                application.applicationStatus = Input.value;
+              onChange={e => {
+                console.log(e.target.value);
+                application.applicationStatus = e.target.value;
               }}
               defaultValue={application.applicationStatus}
             >

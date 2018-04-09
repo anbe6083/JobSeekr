@@ -5,7 +5,6 @@ import {
   EDIT_APPLICATION
 } from '../actions/applicationActions';
 
-let applicationId = 3;
 const initialState = [
   {
     applicationId: 0,
@@ -37,9 +36,23 @@ const initialState = [
 ];
 
 const applicationReducer = (state = initialState, action) => {
+  console.log(action.applicationId);
   switch (action.type) {
     case 'ADD_NEW_APPLICATION':
-      return [...state, action.application];
+      return [
+        ...state,
+        {
+          applicationId: action.applicationId,
+          company: action.application.company,
+          position: action.application.position,
+          dateSubmitted: action.application.dateSubmitted,
+          applicationUrl: action.application.applicationUrl,
+          applicationStatus: action.application.applicationStatus,
+          resumeUsed: 'Placeholder'
+        }
+      ];
+    case 'EDIT_APPLICATION':
+      return Object.assign([], this.state.find());
     default:
       return state;
   }

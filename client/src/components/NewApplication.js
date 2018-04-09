@@ -45,7 +45,7 @@ class NewApplication extends Component {
   }
 
   render() {
-    console.log(this.state.dateSubmitted);
+    console.log(this.props);
     return (
       <div>
         <Modal
