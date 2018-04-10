@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { Modal, Button, Input, Row } from 'react-materialize';
 import { connect } from 'react-redux';
 import { addNewApplication } from '../actions/applicationActions';
+import {
+  incrementAppliedAmount,
+  changeApplicationStatusAmount
+} from '../actions/dashboardActions';
 import { bindActionCreators } from 'redux';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-
 import 'react-datepicker/dist/react-datepicker.css';
 
 class NewApplication extends Component {
@@ -34,6 +37,7 @@ class NewApplication extends Component {
   onSubmit(e) {
     e.preventDefault();
     this.props.addNewApplication(this.state);
+    this.props.incrementAppliedAmount(this.state);
     this.setState({
       company: '',
       position: '',
@@ -125,7 +129,13 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ addNewApplication: addNewApplication }, dispatch);
+  return bindActionCreators(
+    {
+      addNewApplication: addNewApplication,
+      incrementAppliedAmount: incrementAppliedAmount
+    },
+    dispatch
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewApplication);
