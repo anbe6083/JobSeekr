@@ -2,21 +2,6 @@ const express = require('express');
 const app = express();
 const axios = require('axios');
 const keys = require('./config/keys');
-app.get('/', (req, res) => {
-  res.send({ test: 'hello world' });
-});
-
-app.get('/api/authJobs', (req, res) => {
-  axios
-    .get(
-      `https://authenticjobs.com/api/?api_key=${
-        keys.authenticJobs.api_key
-      }&method=aj.jobs.search&keywords=Software%20Engineer, Front%20End%20Engineer, Javascript, Node, Node.js, C&format=json`
-    )
-    .then(json => {
-      res.send(json.data.listings['listing']);
-    });
-});
 
 const getJobListings = () => {
   const request = axios
@@ -191,6 +176,22 @@ const createNewCard = (newListing, trelloListId) => {
       return Promise.reject(err);
     });
 };
+
+app.get('/', (req, res) => {
+  res.send({ test: 'hello world' });
+});
+
+app.get('/api/authJobs', (req, res) => {
+  axios
+    .get(
+      `https://authenticjobs.com/api/?api_key=${
+        keys.authenticJobs.api_key
+      }&method=aj.jobs.search&keywords=Software%20Engineer, Front%20End%20Engineer, Javascript, Node, Node.js, C&format=json`
+    )
+    .then(json => {
+      res.send(json.data.listings['listing']);
+    });
+});
 
 app.get('/api/trelloNewBoard', async (req, res) => {
   res.redirect('http://www.trello.com/b/' + (await createNewBoard()));
