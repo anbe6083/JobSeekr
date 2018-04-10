@@ -4,6 +4,7 @@ import NewApplication from './NewApplication';
 import { connect } from 'react-redux';
 import { Input } from 'react-materialize';
 import { bindActionCreators } from 'redux';
+import { changeApplicationStatusAmount } from '../actions/dashboardActions';
 import { editApplication } from '../actions/applicationActions';
 const tdStyling = {
   cursor: 'pointer'
@@ -123,7 +124,13 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ editApplication: editApplication }, dispatch);
+  return bindActionCreators(
+    {
+      editApplication: editApplication,
+      changeApplicationStatusAmount: changeApplicationStatusAmount
+    },
+    dispatch
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApplicationList);
