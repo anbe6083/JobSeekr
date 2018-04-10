@@ -36,7 +36,6 @@ const initialState = [
 ];
 
 const applicationReducer = (state = initialState, action) => {
-  console.log(state);
   switch (action.type) {
     case 'ADD_NEW_APPLICATION':
       return [
@@ -56,12 +55,12 @@ const applicationReducer = (state = initialState, action) => {
         application =>
           application.applicationId === action.application.applicationId
       );
-      console.log(action.application.newApplicationStatus);
       return [
         ...state.slice(0, index),
         {
           ...state[index],
           applicationStatus: action.application.newApplicationStatus,
+          oldApplicationStatus: action.application.oldApplicationStatus,
           resumeUsed: 'Placeholder'
         },
         ...state.slice(index + 1)
