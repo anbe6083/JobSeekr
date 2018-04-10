@@ -4,8 +4,13 @@ import Dashboard from 'react-dazzle';
 import DoughnutChart from './widgets/DoughnutChart';
 import BarChart from './widgets/Bar';
 import CompanyBar from './widgets/CompanyBar';
-
-export default class User_DashBoard extends Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {
+  addNewApplication,
+  editApplication
+} from '../actions/applicationActions';
+class User_DashBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -59,3 +64,18 @@ export default class User_DashBoard extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    dashboard: state
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    addNewApplication: addNewApplication,
+    editApplication: editApplication
+  });
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(User_DashBoard);
