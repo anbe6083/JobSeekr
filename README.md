@@ -12,3 +12,25 @@ This application also creates a dynamic Trello board, with Lists of the location
 Each card Has all of the information you need to conduct an efficient job search. 
 
 **Created using: React, Redux, d3.js, Chart.js, Dazzle, Node.js, Express, Authenticjobs.com API, Trello API, JSON**
+## Installation
+
+### Requirements
+* Download the project and install dependencies with:
+
+`$ npm install`
+
+## Usage
+
+```
+npm run dev
+
+localhost:3000 to access front-end application
+```
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
