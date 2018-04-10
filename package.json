@@ -4,6 +4,10 @@
   "description":
     "Helps people organize their job search into new Trello Boards, Lists and cards",
   "main": "index.js",
+  "engines": {
+    "node": "8.8.1",
+    "npm": "5.0.3"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --trace-warnings index.js",
