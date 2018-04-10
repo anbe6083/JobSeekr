@@ -24,7 +24,7 @@ Each card Has all of the information you need to conduct an efficient job search
 ```
 npm run dev
 
-localhost:3000 to access front-end application
+localhost:3000
 ```
 
 ## Contributing
