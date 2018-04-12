@@ -21,7 +21,7 @@ Each card Has all of the information you need to conduct an efficient job search
 
 ## Usage
 
-```
+```javascript
 npm run dev
 
 localhost:3000
