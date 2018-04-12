@@ -10,6 +10,8 @@ import {
   addNewApplication,
   editApplication
 } from '../actions/applicationActions';
+
+import '../styles/style.css';
 class User_DashBoard extends Component {
   constructor(props) {
     super(props);

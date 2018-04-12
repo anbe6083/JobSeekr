@@ -1,7 +1,8 @@
 {
   "name": "jobseekr",
   "version": "1.0.0",
-  "description": "Helps people organize their job search into new Trello Boards, Lists and cards",
+  "description":
+    "Helps people organize their job search into new Trello Boards, Lists and cards",
   "main": "index.js",
   "engines": {
     "node": "8.8.1",
