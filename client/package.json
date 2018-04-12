@@ -2,7 +2,9 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5000",
   "dependencies": {
+    "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
     "chart.js": "^2.7.2",
     "keymirror": "^0.1.1",

@@ -10,7 +10,7 @@ import { bindActionCreators } from 'redux';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import axios from 'axios';
 class NewApplication extends Component {
   constructor(props) {
     super(props);
@@ -38,6 +38,15 @@ class NewApplication extends Component {
     e.preventDefault();
     this.props.addNewApplication(this.state);
     this.props.incrementAppliedAmount(this.state);
+    axios
+      .post('/applications/new', this.state)
+      .then(function(res) {
+        console.log(res);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
     this.setState({
       company: '',
       position: '',
