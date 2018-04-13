@@ -68,7 +68,16 @@ class NewApplication extends Component {
         <Modal
           header="Add A New Application"
           trigger={
-            <Button waves="light">
+            <Button
+              floating
+              icon="add"
+              waves="light"
+              fab="vertical"
+              faicon="fa fa-plus"
+              className="red"
+              large
+              style={{ bottom: '45px', right: '24px' }}
+            >
               +
               <i className="material-icons">person_add</i>
             </Button>
