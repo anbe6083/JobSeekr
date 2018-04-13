@@ -39,9 +39,15 @@ class NewApplication extends Component {
     this.props.addNewApplication(this.state);
     this.props.incrementAppliedAmount(this.state);
     axios
-      .post('/applications/new', this.state)
+      .post('/applications/new', {
+        company: this.state.company,
+        position: this.state.position,
+        dateSubmitted: moment().format('MM/DD/YYYY'),
+        applicationUrl: this.state.applicationUrl,
+        applicationStatus: this.state.applicationStatus
+      })
       .then(function(res) {
-        console.log(res);
+        // console.log(res);
       })
       .catch(function(error) {
         console.log(error);
