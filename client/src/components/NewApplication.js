@@ -70,17 +70,13 @@ class NewApplication extends Component {
           trigger={
             <Button
               floating
-              icon="add"
               waves="light"
-              fab="vertical"
               faicon="fa fa-plus"
               className="red"
+              icon="add"
               large
-              style={{ bottom: '45px', right: '24px' }}
-            >
-              +
-              <i className="material-icons">person_add</i>
-            </Button>
+              // style={{ bottom: '45px', right: '24px' }}
+            />
           }
         >
           <form onSubmit={this.onSubmit}>
