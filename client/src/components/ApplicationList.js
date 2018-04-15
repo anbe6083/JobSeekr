@@ -82,7 +82,12 @@ class ApplicationList extends Component {
           <td>{application.company}</td>
           <td>{application.position}</td>
           {/* <td>{application.dateSubmitted.format('MM/DD/YYYY')}</td> */}
-          <td>{application.dateSubmitted.toString()}</td>
+          {typeof application.dateSubmitted === 'object' ? (
+            <td>{application.dateSubmitted.format('MM/DD/YYYY')}</td>
+          ) : (
+            <td>{application.dateSubmitted}</td>
+          )}
+          {/* <td>{application.dateSubmitted.toString()}</td> */}
           <td>
             <a href={application.applicationUrl}>Application URL</a>
           </td>
