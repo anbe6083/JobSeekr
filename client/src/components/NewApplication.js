@@ -42,7 +42,7 @@ class NewApplication extends Component {
       .post('/applications/new', {
         company: this.state.company,
         position: this.state.position,
-        dateSubmitted: moment().format('MM/DD/YYYY'),
+        dateSubmitted: this.state.dateSubmitted.format('MM/DD/YYYY'),
         applicationUrl: this.state.applicationUrl,
         applicationStatus: this.state.applicationStatus
       })
@@ -53,13 +53,13 @@ class NewApplication extends Component {
         console.log(error);
       });
 
-    this.setState({
-      company: '',
-      position: '',
-      dateSubmitted: moment(),
-      applicationUrl: '',
-      applicationStatus: ''
-    });
+    // this.setState({
+    //   company: '',
+    //   position: '',
+    //   dateSubmitted: moment(),
+    //   applicationUrl: '',
+    //   applicationStatus: ''
+    // });
   }
 
   render() {

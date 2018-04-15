@@ -5,7 +5,6 @@ import {
   EDIT_APPLICATION
 } from '../actions/applicationActions';
 import axios from 'axios';
-
 const initialState = [
   // {
   //   applicationId: 0,

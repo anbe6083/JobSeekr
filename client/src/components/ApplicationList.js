@@ -10,6 +10,7 @@ import {
   addNewApplication
 } from '../actions/applicationActions';
 import axios from 'axios';
+import moment from 'moment';
 const tdStyling = {
   cursor: 'pointer'
 };
@@ -75,12 +76,13 @@ class ApplicationList extends Component {
 
   populateApplications() {
     return this.props.myApplications.myApplications.map(application => {
+      console.log(application);
       return (
         <tr key={application.applicationId}>
           <td>{application.company}</td>
           <td>{application.position}</td>
           {/* <td>{application.dateSubmitted.format('MM/DD/YYYY')}</td> */}
-          <td>{application.dateSubmitted}</td>
+          <td>{application.dateSubmitted.toString()}</td>
           <td>
             <a href={application.applicationUrl}>Application URL</a>
           </td>
