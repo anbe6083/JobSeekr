@@ -21,6 +21,7 @@ app.use(passport.session());
 mongoose.connect(keys.mongoDb.mongoUri);
 
 require('./routes/authRoutes')(app);
+require('./routes/applicationRoutes')(app);
 
 // const getJobListings = () => {
 //   const request = axios

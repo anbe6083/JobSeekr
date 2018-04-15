@@ -4,35 +4,36 @@ import {
   ADD_NEW_APPLICATION,
   EDIT_APPLICATION
 } from '../actions/applicationActions';
+import axios from 'axios';
 
 const initialState = [
-  {
-    applicationId: 0,
-    company: 'Facebook',
-    position: 'Software Engineer',
-    dateSubmitted: moment(),
-    applicationUrl: 'facebook.com',
-    applicationStatus: 'Applied',
-    resumeUsed: 'Placeholder'
-  },
-  {
-    applicationId: 1,
-    company: 'Twitter',
-    position: 'Data Analyst',
-    dateSubmitted: moment(),
-    applicationUrl: 'twitter.com',
-    applicationStatus: 'Rejected',
-    resumeUsed: 'Placeholder'
-  },
-  {
-    applicationId: 2,
-    company: 'Instagram',
-    position: 'Senior Software Engineer',
-    dateSubmitted: moment(),
-    applicationUrl: 'www.instagram.com',
-    applicationStatus: 'First Interview',
-    resumeUsed: 'Placeholder'
-  }
+  // {
+  //   applicationId: 0,
+  //   company: 'Facebook',
+  //   position: 'Software Engineer',
+  //   dateSubmitted: moment(),
+  //   applicationUrl: 'facebook.com',
+  //   applicationStatus: 'Applied',
+  //   resumeUsed: 'Placeholder'
+  // },
+  // {
+  //   applicationId: 1,
+  //   company: 'Twitter',
+  //   position: 'Data Analyst',
+  //   dateSubmitted: moment(),
+  //   applicationUrl: 'twitter.com',
+  //   applicationStatus: 'Rejected',
+  //   resumeUsed: 'Placeholder'
+  // },
+  // {
+  //   applicationId: 2,
+  //   company: 'Instagram',
+  //   position: 'Senior Software Engineer',
+  //   dateSubmitted: moment(),
+  //   applicationUrl: 'www.instagram.com',
+  //   applicationStatus: 'First Interview',
+  //   resumeUsed: 'Placeholder'
+  // }
 ];
 
 const applicationReducer = (state = initialState, action) => {

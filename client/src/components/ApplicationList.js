@@ -5,7 +5,11 @@ import { connect } from 'react-redux';
 import { Input } from 'react-materialize';
 import { bindActionCreators } from 'redux';
 import { changeApplicationStatusAmount } from '../actions/dashboardActions';
-import { editApplication } from '../actions/applicationActions';
+import {
+  editApplication,
+  addNewApplication
+} from '../actions/applicationActions';
+import axios from 'axios';
 const tdStyling = {
   cursor: 'pointer'
 };
@@ -44,6 +48,15 @@ class ApplicationList extends Component {
     };
   }
 
+  async componentDidMount() {
+    const list = await axios.get('/applications/list');
+    // console.log(this.props);
+    list.data.forEach(application => {
+      // console.log(this.props);
+      this.props.addNewApplication(application);
+    });
+  }
+
   populateTableHeader() {
     return (
       <thead>
@@ -66,7 +79,8 @@ class ApplicationList extends Component {
         <tr key={application.applicationId}>
           <td>{application.company}</td>
           <td>{application.position}</td>
-          <td>{application.dateSubmitted.format('MM/DD/YYYY')}</td>
+          {/* <td>{application.dateSubmitted.format('MM/DD/YYYY')}</td> */}
+          <td>{application.dateSubmitted}</td>
           <td>
             <a href={application.applicationUrl}>Application URL</a>
           </td>
@@ -127,6 +141,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       editApplication: editApplication,
+      addNewApplication: addNewApplication,
       changeApplicationStatusAmount: changeApplicationStatusAmount
     },
     dispatch

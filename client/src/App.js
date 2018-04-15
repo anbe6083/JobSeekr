@@ -9,9 +9,7 @@ import NavBar from './components/NavBar';
 // Default styles.
 import 'react-dazzle/lib/style/style.css';
 // import 'bootstrap/dist/css/bootstrap.css';
-
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-
 import { SideNav, SideNavItem, Button } from 'react-materialize';
 
 class App extends Component {
