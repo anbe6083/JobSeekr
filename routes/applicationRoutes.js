@@ -25,6 +25,7 @@ module.exports = app => {
       function(err, doc) {
         // console.log(req.body);
         doc.applications.push({
+          applicationId: req.body.applicationId,
           company: req.body.company,
           position: req.body.position,
           dateSubmitted: req.body.dateSubmitted,

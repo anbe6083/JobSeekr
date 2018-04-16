@@ -8,7 +8,7 @@ import axios from 'axios';
 const initialState = [];
 
 const applicationReducer = (state = initialState, action) => {
-  console.log(action.type);
+  console.log(action.applicationId);
   switch (action.type) {
     case 'ADD_NEW_APPLICATION':
       return [
@@ -24,7 +24,7 @@ const applicationReducer = (state = initialState, action) => {
         }
       ];
     case 'ADD_NEW_APPLICATION_TO_SERVER':
-      console.log('ADD_NEW_APPLICATION_TO_SERVER');
+      console.log(action.applicationId);
       axios
         .post('/applications/new', {
           applicationId: action.applicationId,
