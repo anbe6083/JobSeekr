@@ -11,6 +11,9 @@
     },
     "/applications/list": {
       "target": "http://localhost:5000"
+    },
+    "/applications/new": {
+      "target": "http://localhost:5000"
     }
   },
   "dependencies": {
