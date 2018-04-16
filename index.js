@@ -197,10 +197,6 @@ require('./routes/applicationRoutes')(app);
 //     });
 // };
 
-app.get('/', (req, res) => {
-  res.send({ test: 'hello world' });
-});
-
 // app.get('/api/authJobs', (req, res) => {
 //   axios
 //     .get(

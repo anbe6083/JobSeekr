@@ -19,26 +19,7 @@ class NetworkList extends Component {
     super(props);
 
     this.state = {
-      myNetwork: [
-        // {
-        //   name: 'John Doe',
-        //   position: 'CTO',
-        //   linkedinUrl: 'http://www.linkedin.com/fake',
-        //   phoneNumber: '661-111-2222',
-        //   lastContactDate: '11/22/2017',
-        //   photo: require('../icons/businessman.png'),
-        //   email: 'fake@fake.com'
-        // },
-        // {
-        //   name: 'Andrew Berumen',
-        //   position: 'CEO',
-        //   linkedinUrl: 'https://www.linkedin.com/in/andrewberumen/',
-        //   phoneNumber: '123-456-7890',
-        //   lastContactDate: '11/22/2017',
-        //   photo: require('../icons/aberumen.jpeg'),
-        //   email: 'fake@fake.com'
-        // }
-      ]
+      myNetwork: []
     };
   }
 

@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { SideNav, SideNavItem, Button } from 'react-materialize';
+import {
+  SideNav,
+  SideNavItem,
+  Button,
+  Navbar,
+  NavItem,
+  Icon,
+  Dropdown
+} from 'react-materialize';
 export default class NavBar extends Component {
   render() {
     return (
@@ -7,7 +15,7 @@ export default class NavBar extends Component {
         <SideNav
           trigger={
             <Button className="left">
-              <i className="large material-icons">arrow_right</i>
+              <Icon>more_vert</Icon>
             </Button>
           }
           options={{ closeOnClick: true }}

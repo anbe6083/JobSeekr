@@ -25,9 +25,13 @@ class App extends Component {
         <Router>
           <div>
             <Route exact path="/" component={() => <User_Dashboard />} />
-            <Route path="/companies" component={() => <CompanyTree />} />
-            <Route path="/people" component={() => <NetworkList />} />
-            <Route path="/applications" component={() => <ApplicationList />} />
+            <Route exact path="/companies" component={() => <CompanyTree />} />
+            <Route exact path="/people" component={() => <NetworkList />} />
+            <Route
+              exact
+              path="/applications"
+              component={() => <ApplicationList />}
+            />
           </div>
         </Router>
       </div>

@@ -76,7 +76,6 @@ class ApplicationList extends Component {
 
   populateApplications() {
     return this.props.myApplications.myApplications.map(application => {
-      console.log(application);
       return (
         <tr key={application.applicationId}>
           <td>{application.company}</td>

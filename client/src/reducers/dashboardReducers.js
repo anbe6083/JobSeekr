@@ -38,6 +38,14 @@ const dashboardReducer = (state = initialState, action) => {
         'Third Interview': state['Third Interview'] + 1
       };
     case 'EDIT_APPLICATION':
+      const oldApplicationStatus = action.application.oldApplicationStatus;
+      const newApplicationStatus = action.application.newApplicationStatus;
+      const newState = {
+        ...state
+      };
+      newState[oldApplicationStatus] = state[oldApplicationStatus]--;
+      newState[newApplicationStatus] = state[newApplicationStatus]++;
+      return newState;
     //TODO
     default:
       return state;

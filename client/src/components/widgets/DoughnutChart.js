@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import { incrementApplicationAmount } from '../../actions/dashboardActions';
+import { editApplication } from '../../actions/applicationActions';
 class DoughnutChart extends Component {
   constructor() {
     super();
@@ -25,7 +26,6 @@ class DoughnutChart extends Component {
   }
 
   async componentDidMount() {
-    console.log(this.props);
     const list = await axios.get('/applications/list');
     list.data.forEach(application => {
       this.props.incrementApplicationAmount(application);
@@ -33,7 +33,6 @@ class DoughnutChart extends Component {
   }
 
   render() {
-    console.log(this.props.doughnut.dashboardReducers);
     let labels = {
       labels: [
         'Rejected',
@@ -91,7 +90,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      incrementApplicationAmount: incrementApplicationAmount
+      incrementApplicationAmount: incrementApplicationAmount,
+      editApplication: editApplication
     },
     dispatch
   );
