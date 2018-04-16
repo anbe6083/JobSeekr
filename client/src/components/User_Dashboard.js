@@ -10,6 +10,8 @@ import {
   addNewApplication,
   editApplication
 } from '../actions/applicationActions';
+import { incrementApplicationAmount } from '../actions/dashboardActions';
+import axios from 'axios';
 
 import '../styles/style.css';
 class User_DashBoard extends Component {
@@ -57,6 +59,13 @@ class User_DashBoard extends Component {
     };
   }
 
+  // async componentDidMount() {
+  //   const list = await axios.get('/applications/list');
+  //   list.data.forEach(application => {
+  //     this.props.incrementAppliedAmount(application);
+  //   });
+  // }
+
   render() {
     return (
       <div>
@@ -74,10 +83,14 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    addNewApplication: addNewApplication,
-    editApplication: editApplication
-  });
+  return bindActionCreators(
+    {
+      addNewApplication: addNewApplication,
+      editApplication: editApplication,
+      incrementApplicationAmount: incrementApplicationAmount
+    },
+    dispatch
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(User_DashBoard);

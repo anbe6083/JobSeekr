@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
+import axios from 'axios';
+import { incrementApplicationAmount } from '../../actions/dashboardActions';
 class DoughnutChart extends Component {
   constructor() {
     super();
@@ -23,8 +24,16 @@ class DoughnutChart extends Component {
     clearInterval(this.state.refreshIntervalId);
   }
 
-  render() {
+  async componentDidMount() {
     console.log(this.props);
+    const list = await axios.get('/applications/list');
+    list.data.forEach(application => {
+      this.props.incrementApplicationAmount(application);
+    });
+  }
+
+  render() {
+    console.log(this.props.doughnut.dashboardReducers);
     let labels = {
       labels: [
         'Rejected',
@@ -37,12 +46,12 @@ class DoughnutChart extends Component {
       datasets: [
         {
           data: [
-            this.props.doughnut.dashboardReducers.rejected,
-            this.props.doughnut.dashboardReducers.offer,
-            this.props.doughnut.dashboardReducers.applied,
-            this.props.doughnut.dashboardReducers['first interview'],
-            this.props.doughnut.dashboardReducers['second interview'],
-            this.props.doughnut.dashboardReducers['third interview']
+            this.props.doughnut.dashboardReducers.Rejected,
+            this.props.doughnut.dashboardReducers.Offer,
+            this.props.doughnut.dashboardReducers.Applied,
+            this.props.doughnut.dashboardReducers['First Interview'],
+            this.props.doughnut.dashboardReducers['Second Interview'],
+            this.props.doughnut.dashboardReducers['Third Interview']
           ],
           backgroundColor: [
             '#FF6384',
@@ -79,4 +88,13 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(DoughnutChart);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      incrementApplicationAmount: incrementApplicationAmount
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DoughnutChart);

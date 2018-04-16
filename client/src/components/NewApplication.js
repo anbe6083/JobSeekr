@@ -3,7 +3,7 @@ import { Modal, Button, Input, Row } from 'react-materialize';
 import { connect } from 'react-redux';
 import { addNewApplication } from '../actions/applicationActions';
 import {
-  incrementAppliedAmount,
+  incrementApplicationAmount,
   changeApplicationStatusAmount
 } from '../actions/dashboardActions';
 import { bindActionCreators } from 'redux';
@@ -37,7 +37,7 @@ class NewApplication extends Component {
   onSubmit(e) {
     e.preventDefault();
     this.props.addNewApplication(this.state);
-    this.props.incrementAppliedAmount(this.state);
+    this.props.incrementApplicationAmount(this.state);
     axios
       .post('/applications/new', {
         company: this.state.company,
@@ -152,7 +152,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       addNewApplication: addNewApplication,
-      incrementAppliedAmount: incrementAppliedAmount
+      incrementApplicationAmount: incrementApplicationAmount
     },
     dispatch
   );

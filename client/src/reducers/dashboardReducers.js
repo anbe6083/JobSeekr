@@ -1,11 +1,11 @@
 //intiialState for dashboard
 const initialState = {
-  applied: 1,
-  rejected: 1,
-  'first interview': 1,
-  'second interview': 0,
-  'third interview': 0,
-  offer: 0
+  Applied: 0,
+  Rejected: 0,
+  'First Interview': 0,
+  'Second Interview': 0,
+  'Third Interview': 0,
+  Offer: 0
 };
 
 //actions for dashboard charts
@@ -13,7 +13,30 @@ const initialState = {
 const dashboardReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'INCREMENT_APPLIED':
-      state.applied++;
+      return {
+        ...state,
+        Applied: state.Applied + 1
+      };
+    case 'INCREMENT_FIRST_INTERVIEW':
+      return {
+        ...state,
+        'First Interview': state['First Interview'] + 1
+      };
+    case 'INCREMENT_REJECTED':
+      return {
+        ...state,
+        Rejected: state.Rejected + 1
+      };
+    case 'INCREMENT_SECOND_INTERVIEW':
+      return {
+        ...state,
+        'Second Interview': state['Second Interview'] + 1
+      };
+    case 'INCREMENT_THIRD_INTERVIEW':
+      return {
+        ...state,
+        'Third Interview': state['Third Interview'] + 1
+      };
     case 'EDIT_APPLICATION':
     //TODO
     default:
