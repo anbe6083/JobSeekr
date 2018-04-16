@@ -11,6 +11,14 @@ export function addNewApplication(application) {
   };
 }
 
+export function addNewApplicationToServer(application) {
+  return {
+    type: 'ADD_NEW_APPLICATION_TO_SERVER',
+    application,
+    applicationId: applicationId++
+  };
+}
+
 export function editApplication(application) {
   return {
     type: 'EDIT_APPLICATION',

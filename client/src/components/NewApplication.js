@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, Input, Row } from 'react-materialize';
 import { connect } from 'react-redux';
-import { addNewApplication } from '../actions/applicationActions';
+import { addNewApplicationToServer } from '../actions/applicationActions';
 import {
   incrementApplicationAmount,
   changeApplicationStatusAmount
@@ -36,22 +36,8 @@ class NewApplication extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.props.addNewApplication(this.state);
+    this.props.addNewApplicationToServer(this.state);
     this.props.incrementApplicationAmount(this.state);
-    axios
-      .post('/applications/new', {
-        company: this.state.company,
-        position: this.state.position,
-        dateSubmitted: this.state.dateSubmitted.format('MM/DD/YYYY'),
-        applicationUrl: this.state.applicationUrl,
-        applicationStatus: this.state.applicationStatus
-      })
-      .then(function(res) {
-        // console.log(res);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
 
     // this.setState({
     //   company: '',
@@ -151,7 +137,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      addNewApplication: addNewApplication,
+      addNewApplicationToServer: addNewApplicationToServer,
       incrementApplicationAmount: incrementApplicationAmount
     },
     dispatch
