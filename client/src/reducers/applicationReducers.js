@@ -8,7 +8,6 @@ import axios from 'axios';
 const initialState = [];
 
 const applicationReducer = (state = initialState, action) => {
-  console.log(action.applicationId);
   switch (action.type) {
     case 'ADD_NEW_APPLICATION':
       return [
@@ -24,7 +23,6 @@ const applicationReducer = (state = initialState, action) => {
         }
       ];
     case 'ADD_NEW_APPLICATION_TO_SERVER':
-      console.log(action.applicationId);
       axios
         .post('/applications/new', {
           applicationId: action.applicationId,
@@ -57,7 +55,7 @@ const applicationReducer = (state = initialState, action) => {
         application =>
           application.applicationId === action.application.applicationId
       );
-      return [
+      const newState = [
         ...state.slice(0, index),
         {
           ...state[index],
@@ -67,6 +65,8 @@ const applicationReducer = (state = initialState, action) => {
         },
         ...state.slice(index + 1)
       ];
+      axios.post('/api/applications/updateApplicationStatus', newState);
+      return newState;
     default:
       return state;
   }
