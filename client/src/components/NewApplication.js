@@ -61,7 +61,6 @@ class NewApplication extends Component {
               className="red"
               icon="add"
               large
-              // style={{ bottom: '45px', right: '24px' }}
             />
           }
         >
@@ -118,6 +117,7 @@ class NewApplication extends Component {
               className="btn waves-effect waves-light"
               type="submit"
               name="action"
+              modal={'close'}
             >
               Submit
             </Button>
