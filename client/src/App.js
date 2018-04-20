@@ -11,6 +11,11 @@ import 'react-dazzle/lib/style/style.css';
 // import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { SideNav, SideNavItem, Button } from 'react-materialize';
+import { Provider } from 'react-redux';
+import rootReducer from './reducers';
+import { createStore } from 'redux';
+
+const store = createStore(rootReducer);
 
 class App extends Component {
   constructor(props) {
@@ -22,18 +27,24 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <br />
-        <Router>
-          <div>
-            <Route exact path="/" component={() => <User_Dashboard />} />
-            <Route exact path="/companies" component={() => <CompanyTree />} />
-            <Route exact path="/people" component={() => <NetworkList />} />
-            <Route
-              exact
-              path="/applications"
-              component={() => <ApplicationList />}
-            />
-          </div>
-        </Router>
+        <Provider store={store}>
+          <Router>
+            <div>
+              <Route exact path="/" component={() => <User_Dashboard />} />
+              <Route
+                exact
+                path="/companies"
+                component={() => <CompanyTree />}
+              />
+              <Route exact path="/people" component={() => <NetworkList />} />
+              <Route
+                exact
+                path="/applications"
+                component={() => <ApplicationList />}
+              />
+            </div>
+          </Router>
+        </Provider>
       </div>
     );
   }

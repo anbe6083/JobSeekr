@@ -19,6 +19,13 @@ export function addNewApplicationToServer(application) {
   };
 }
 
+export function deleteApplication(application) {
+  return {
+    type: 'DELETE_APPLICATION',
+    application
+  };
+}
+
 export function editApplication(application) {
   return {
     type: 'EDIT_APPLICATION',

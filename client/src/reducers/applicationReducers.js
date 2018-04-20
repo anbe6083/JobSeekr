@@ -50,6 +50,8 @@ const applicationReducer = (state = initialState, action) => {
           resumeUsed: 'Placeholder'
         }
       ];
+    case 'DELETE_APPLICATION':
+      axios.post('/api/applications/delete', action.application);
     case 'EDIT_APPLICATION':
       const index = state.findIndex(
         application =>

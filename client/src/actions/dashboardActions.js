@@ -42,6 +42,13 @@ export function incrementApplicationAmount(application) {
   }
 }
 
+export function populateArrayOfApplicationMonths(applications) {
+  return {
+    type: 'POPULATE_APPLICATION_BAR_CHART',
+    applications
+  };
+}
+
 export function changeApplicationStatusAmount(application) {
   return {
     type: 'INCREMENT_APPLIED',

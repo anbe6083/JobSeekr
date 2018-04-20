@@ -17,9 +17,14 @@
     }
   },
   "dependencies": {
+    "@types/jest": "^22.2.3",
     "axios": "^0.18.0",
-    "bootstrap": "^4.0.0",
+    "bootstrap": "^4.1.0",
     "chart.js": "^2.7.2",
+    "immutable": "^3.8.2",
+    "jest": "^22.4.3",
+    "jest-cli": "^22.4.3",
+    "jquery": "^3.3.1",
     "keymirror": "^0.1.1",
     "moment": "^2.22.0",
     "react": "^16.2.0",
@@ -29,7 +34,7 @@
     "react-datepicker": "^1.4.1",
     "react-dazzle": "^1.4.0",
     "react-dom": "^16.2.0",
-    "react-materialize": "^2.1.4",
+    "react-materialize": "^2.2.0",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
@@ -39,9 +44,14 @@
     "redux-persist": "^5.9.1"
   },
   "scripts": {
+    "test": "react-scripts test --env=jsdom",
+    "watch": "jest --watch",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-preset-es2015-no-commonjs": "0.0.2",
+    "babel-preset-stage-2": "^6.24.1"
   }
 }

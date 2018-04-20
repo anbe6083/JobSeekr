@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Dashboard from 'react-dazzle';
 // Your widget. Just another react component.
 import DoughnutChart from './widgets/DoughnutChart';
-import BarChart from './widgets/Bar';
+import ApplicationBarChart from './widgets/Bar';
 import CompanyBar from './widgets/CompanyBar';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -10,7 +10,10 @@ import {
   addNewApplication,
   editApplication
 } from '../actions/applicationActions';
-import { incrementApplicationAmount } from '../actions/dashboardActions';
+import {
+  incrementApplicationAmount,
+  populateArrayOfApplicationMonths
+} from '../actions/dashboardActions';
 import axios from 'axios';
 
 import '../styles/style.css';
@@ -23,8 +26,8 @@ class User_DashBoard extends Component {
           type: DoughnutChart,
           title: 'Applications'
         },
-        BarChart: {
-          type: BarChart,
+        ApplicationBarChart: {
+          type: ApplicationBarChart,
           title: 'Bar'
         },
         CompanyBar: {
@@ -46,7 +49,7 @@ class User_DashBoard extends Component {
             columns: [
               {
                 className: 'col-md-6',
-                widgets: [{ key: 'BarChart' }]
+                widgets: [{ key: 'ApplicationBarChart' }]
               },
               {
                 className: 'col-md-6',
@@ -59,12 +62,10 @@ class User_DashBoard extends Component {
     };
   }
 
-  // async componentDidMount() {
-  //   const list = await axios.get('/applications/list');
-  //   list.data.forEach(application => {
-  //     this.props.incrementAppliedAmount(application);
-  //   });
-  // }
+  async componentDidMount() {
+    const list = await axios.get('/applications/list');
+    this.props.populateArrayOfApplicationMonths(await list);
+  }
 
   render() {
     return (
@@ -87,7 +88,8 @@ const mapDispatchToProps = dispatch => {
     {
       addNewApplication: addNewApplication,
       editApplication: editApplication,
-      incrementApplicationAmount: incrementApplicationAmount
+      incrementApplicationAmount: incrementApplicationAmount,
+      populateArrayOfApplicationMonths: populateArrayOfApplicationMonths
     },
     dispatch
   );

@@ -11,6 +11,8 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
+import { Field, reduxForm } from 'redux-form';
+
 class NewApplication extends Component {
   constructor(props) {
     super(props);
@@ -77,6 +79,7 @@ class NewApplication extends Component {
                 label="Company"
                 onChange={this.onChange}
                 name="company"
+                className="validate"
               />
               <Input
                 placeholder="Position"
@@ -92,6 +95,7 @@ class NewApplication extends Component {
                 s={6}
                 label="Application URL"
                 onChange={this.onChange}
+                className="validate"
                 name="applicationUrl"
               />
             </Row>
@@ -103,6 +107,8 @@ class NewApplication extends Component {
                 icon="assignment"
                 name="applicationStatus"
                 onChange={this.onChange}
+                className="validate"
+                defaultValue="Applied"
               >
                 <option value="Applied">Applied</option>
                 <option value="Rejected">Rejected</option>

@@ -18,29 +18,26 @@ module.exports = app => {
   });
 
   app.post('/api/applications/updateApplicationStatus', async (req, res) => {
-    console.log(req.body);
     await User.findOneAndUpdate(
       { googleId: req.user.googleId },
       {
         applications: req.body
       }
     );
-    // await User.findOneAndUpdate({ googleId: req.user.googleId }, function(
-    //   err,
-    //   doc
-    // ) {
-    //   const index = await doc.applications.findIndex(application => {
-    //     return application.applicationId === req.body.applicationId;
-    //   });
-    //   // console.log(doc.applications[index]);
-    //   doc.applications[index] = {
-    //     ...doc.applications[index],
-    //     applicationStatus: req.body.newApplicationStatus
-    //   };
-    //   // console.log(doc.applications[index]); // console.log(doc);
-    //   doc.save();
-    //   console.log(doc);
-    // });
+  });
+
+  app.post('/api/applications/delete', async (req, res) => {
+    console.log(req.user.googleId);
+    await User.findOneAndUpdate(
+      { googleId: req.user.googleId },
+      {
+        $pull: {
+          applications: {
+            applicationId: req.body.applicationId
+          }
+        }
+      }
+    );
   });
 
   //route to post a new application to array of applications on the user's account

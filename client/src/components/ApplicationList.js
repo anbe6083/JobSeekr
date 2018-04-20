@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { Table, Button } from 'react-materialize';
 import NewApplication from './NewApplication';
 import { connect } from 'react-redux';
-import { Input } from 'react-materialize';
+import { Input, Icon, Modal } from 'react-materialize';
 import { bindActionCreators } from 'redux';
 import { changeApplicationStatusAmount } from '../actions/dashboardActions';
 import {
   editApplication,
-  addNewApplication
+  addNewApplication,
+  deleteApplication
 } from '../actions/applicationActions';
 import axios from 'axios';
 import moment from 'moment';
@@ -44,6 +45,10 @@ class ApplicationList extends Component {
         {
           headerName: 'Resume Used',
           dataField: 'resumeUsed'
+        },
+        {
+          headerName: 'Delete',
+          dataField: 'delete'
         }
       ]
     };
@@ -119,10 +124,48 @@ class ApplicationList extends Component {
             </Input>
           </td>
           <td>{application.resumeUsed}</td>
+          <td>
+            <Modal
+              header="Are you sure you want to delete?"
+              trigger={
+                <Button waves="light" style={{ backgroundColor: 'red' }}>
+                  <Icon>delete</Icon>
+                </Button>
+              }
+            >
+              <div style={{ float: 'left' }}>
+                <Button
+                  left
+                  waves="light"
+                  style={{ backgroundColor: 'red' }}
+                  modal={'close'}
+                >
+                  <Icon>close</Icon>
+                </Button>
+              </div>
+              <div style={{ float: 'right' }}>
+                <Button
+                  right
+                  waves="light"
+                  style={{ backgroundColor: 'green' }}
+                  modal={'close'}
+                  onClick={() => {
+                    this.props.deleteApplication(application);
+                  }}
+                >
+                  <Icon>check</Icon>
+                </Button>
+              </div>
+            </Modal>
+          </td>
         </tr>
       );
     });
   }
+
+  onSubmit = values => {
+    console.log(values);
+  };
 
   render() {
     return (
@@ -133,7 +176,7 @@ class ApplicationList extends Component {
 
           <tbody>{this.populateApplications()}</tbody>
         </Table>
-        <NewApplication />
+        <NewApplication onSubmit={this.onSubmit} />
       </div>
     );
   }
@@ -148,7 +191,8 @@ const mapDispatchToProps = dispatch => {
     {
       editApplication: editApplication,
       addNewApplication: addNewApplication,
-      changeApplicationStatusAmount: changeApplicationStatusAmount
+      changeApplicationStatusAmount: changeApplicationStatusAmount,
+      deleteApplication: deleteApplication
     },
     dispatch
   );

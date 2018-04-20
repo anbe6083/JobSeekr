@@ -5,8 +5,25 @@ const initialState = {
   'First Interview': 0,
   'Second Interview': 0,
   'Third Interview': 0,
-  Offer: 0
+  Offer: 0,
+  numberOfApplicationsPerMonth: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 };
+
+//sum up all of the months where the user applied for a job
+function sumDatesOfApplicationsAccordingToMonths(arrayOfApplications, state) {
+  const prevState = state;
+  console.log(prevState);
+  arrayOfApplications.forEach(application => {
+    prevState.numberOfApplicationsPerMonth[
+      parseInt(application.dateSubmitted.split('/')[0]) - 1
+    ]++;
+  });
+  return {
+    ...prevState,
+    numberOfApplicationsPerMonth: state.numberOfApplicationsPerMonth
+  };
+  // return state.numberOfApplicationsPerMonth;
+}
 
 //actions for dashboard charts
 
@@ -37,6 +54,11 @@ const dashboardReducer = (state = initialState, action) => {
         ...state,
         'Third Interview': state['Third Interview'] + 1
       };
+    case 'POPULATE_APPLICATION_BAR_CHART':
+      return sumDatesOfApplicationsAccordingToMonths(
+        action.applications.data,
+        state
+      );
     case 'EDIT_APPLICATION':
       const oldApplicationStatus = action.application.oldApplicationStatus;
       const newApplicationStatus = action.application.newApplicationStatus;

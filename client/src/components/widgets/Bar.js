@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Bar } from 'react-chartjs-2';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-export default class BarChart extends Component {
+class ApplicationBarChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +15,12 @@ export default class BarChart extends Component {
           'April',
           'May',
           'June',
-          'July'
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December'
         ],
         datasets: [
           {
@@ -23,7 +30,8 @@ export default class BarChart extends Component {
             borderWidth: 1,
             hoverBackgroundColor: '#004266',
             hoverBorderColor: '#004266',
-            data: [1, 2, 3, 4, 5, 6, 7]
+            data: this.props.applicationBarChart.dashboardReducers
+              .numberOfApplicationsPerMonth
           },
           {
             label: 'Rejected',
@@ -32,7 +40,7 @@ export default class BarChart extends Component {
             borderWidth: 1,
             hoverBackgroundColor: '#4C1C17',
             hoverBorderColor: '#4C1C17',
-            data: [10, 20, 30, 40, 50, 60, 70]
+            data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
           },
           {
             label: 'Offers',
@@ -41,7 +49,7 @@ export default class BarChart extends Component {
             borderWidth: 1,
             hoverBackgroundColor: '#1BA354',
             hoverBorderColor: '#1BA354',
-            data: [3, 5, 7, 9, 11, 13, 15]
+            data: [3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25]
           },
           {
             label: 'Interviews',
@@ -58,7 +66,9 @@ export default class BarChart extends Component {
       }
     };
   }
+
   render() {
+    console.log();
     return (
       <div>
         <h2>Applications (By Month)</h2>
@@ -87,3 +97,17 @@ export default class BarChart extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    applicationBarChart: state
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({}, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ApplicationBarChart
+);
