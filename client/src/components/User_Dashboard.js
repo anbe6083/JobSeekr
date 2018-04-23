@@ -64,7 +64,7 @@ class User_DashBoard extends Component {
 
   async componentDidMount() {
     const list = await axios.get('/applications/list');
-    this.props.populateArrayOfApplicationMonths(await list);
+    this.props.populateArrayOfApplicationMonths(list);
   }
 
   render() {

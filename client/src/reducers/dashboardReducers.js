@@ -6,17 +6,127 @@ const initialState = {
   'Second Interview': 0,
   'Third Interview': 0,
   Offer: 0,
-  numberOfApplicationsPerMonth: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  numberOfApplicationsPerMonth: [
+    {
+      Month: 'January',
+      Applied: 0,
+      'First Interview': 0,
+      'Second Interview': 0,
+      'Third Interview': 0,
+      Rejected: 0,
+      Offers: 0
+    },
+    {
+      Month: 'Feburary',
+      Applied: 0,
+      'First Interview': 0,
+      'Second Interview': 0,
+      'Third Interview': 0,
+      Rejected: 0,
+      Offers: 0
+    },
+    {
+      Month: 'March',
+      Applied: 0,
+      'First Interview': 0,
+      'Second Interview': 0,
+      'Third Interview': 0,
+      Rejected: 0,
+      Offers: 0
+    },
+    {
+      Month: 'April',
+      Applied: 0,
+      'First Interview': 0,
+      'Second Interview': 0,
+      'Third Interview': 0,
+      Rejected: 0,
+      Offers: 0
+    },
+    {
+      Month: 'May',
+      Applied: 0,
+      'First Interview': 0,
+      'Second Interview': 0,
+      'Third Interview': 0,
+      Rejected: 0,
+      Offers: 0
+    },
+    {
+      Month: 'June',
+      Applied: 0,
+      'First Interview': 0,
+      'Second Interview': 0,
+      'Third Interview': 0,
+      Rejected: 0,
+      Offers: 0
+    },
+    {
+      Month: 'July',
+      Applied: 0,
+      'First Interview': 0,
+      'Second Interview': 0,
+      'Third Interview': 0,
+      Rejected: 0,
+      Offers: 0
+    },
+    {
+      Month: 'August',
+      Applied: 0,
+      'First Interview': 0,
+      'Second Interview': 0,
+      'Third Interview': 0,
+      Rejected: 0,
+      Offers: 0
+    },
+    {
+      Month: 'September',
+      Applied: 0,
+      'First Interview': 0,
+      'Second Interview': 0,
+      'Third Interview': 0,
+      Rejected: 0,
+      Offers: 0
+    },
+    {
+      Month: 'October',
+      Applied: 0,
+      'First Interview': 0,
+      'Second Interview': 0,
+      'Third Interview': 0,
+      Rejected: 0,
+      Offers: 0
+    },
+    {
+      Month: 'November',
+      Applied: 0,
+      'First Interview': 0,
+      'Second Interview': 0,
+      'Third Interview': 0,
+      Rejected: 0,
+      Offers: 0
+    },
+    {
+      Month: 'December',
+      Applied: 0,
+      'First Interview': 0,
+      'Second Interview': 0,
+      'Third Interview': 0,
+      Rejected: 0,
+      Offers: 0
+    }
+  ]
 };
 
-//sum up all of the months where the user applied for a job
+//iterates through an array of month objects. Sums all of the
+//statuses of the job applications
+
 function sumDatesOfApplicationsAccordingToMonths(arrayOfApplications, state) {
   const prevState = state;
-  console.log(prevState);
   arrayOfApplications.forEach(application => {
-    prevState.numberOfApplicationsPerMonth[
+    state.numberOfApplicationsPerMonth[
       parseInt(application.dateSubmitted.split('/')[0]) - 1
-    ]++;
+    ][application.applicationStatus]++;
   });
   return {
     ...prevState,
