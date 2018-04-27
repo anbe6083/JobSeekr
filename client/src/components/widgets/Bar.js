@@ -106,77 +106,27 @@ class ApplicationBarChart extends Component {
 
     Promise.all(result)
       .then(completed => {
-        console.log(completed);
-        const stateObj = this.state.data.datasets.find(dataset => {
-          return dataset.label === status;
+        const applicationDatasetToUpdate = { ...this.state.data }.datasets.find(
+          dataset => {
+            return dataset.label === status;
+          }
+        );
+
+        const objIndex = { ...this.state.data }.datasets.findIndex(obj => {
+          return obj.label === status;
         });
+
+        applicationDatasetToUpdate.data = completed;
+        const newDataSet = this.state.data.datasets.slice();
+        newDataSet[objIndex] = applicationDatasetToUpdate;
         this.setState({
+          ...this.state,
+          //bug is right here. Copying new values to datasets array. Slice and update the array
           data: {
-            datasets: [
-              {
-                label: 'Applied',
-                backgroundColor: '#006BA6',
-                borderColor: '#006BA6',
-                borderWidth: 1,
-                hoverBackgroundColor: '#004266',
-                hoverBorderColor: '#004266',
-                data: [0]
-              },
-              {
-                label: 'Rejected',
-                backgroundColor: '#7B2D26',
-                borderColor: '#7B2D26',
-                borderWidth: 1,
-                hoverBackgroundColor: '#4C1C17',
-                hoverBorderColor: '#4C1C17',
-                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-              },
-              {
-                label: 'Offer',
-                backgroundColor: '#23CE6B',
-                borderColor: '#23CE6B',
-                borderWidth: 1,
-                hoverBackgroundColor: '#1BA354',
-                hoverBorderColor: '#1BA354',
-                data: [0]
-              },
-              {
-                label: 'First Interview',
-                backgroundColor: '#3D5467',
-                borderColor: '#3D5467',
-                borderWidth: 1,
-                borderColor: '#3D5467',
-                hoverBackgroundColor: '#3D5467',
-                borderColor: '#3D5467',
-                hoverBorderColor: 'rgba(255,99,132,1)',
-                data: completed
-              },
-              {
-                label: 'Second Interview',
-                backgroundColor: '#F2BB05',
-                borderColor: '#F2BB05',
-                borderWidth: 1,
-                borderColor: '#F2BB05',
-                hoverBackgroundColor: '#C6B9CD',
-                borderColor: '#C6B9CD',
-                hoverBorderColor: 'rgba(255,99,132,1)',
-                data: [0]
-              },
-              {
-                label: 'Third Interview',
-                backgroundColor: '#F2BB05',
-                borderColor: '#F2BB05',
-                borderWidth: 1,
-                borderColor: '#F2BB05',
-                hoverBackgroundColor: '#DF367C',
-                borderColor: '#DF367C',
-                hoverBorderColor: 'rgba(255,99,132,1)',
-                data: [0]
-              }
-            ]
+            ...this.state.data,
+            datasets: newDataSet
           }
         });
-        console.log(this.state);
       })
       .catch(err => {
         console.log(err);
@@ -187,18 +137,18 @@ class ApplicationBarChart extends Component {
   async componentDidMount() {
     const list = await axios.get('/applications/list');
     this.props.populateArrayOfApplicationMonths(list);
-    // this.state.applicationStatus.forEach(async status => {
-    //   const newData = await this.sumApplicationStatus(
-    //     this.props.applicationBarChart.dashboardReducers
-    //       .numberOfApplicationsPerMonth,
-    //     status
-    //   );
-    // });
-    const newData = await this.sumApplicationStatus(
-      this.props.applicationBarChart.dashboardReducers
-        .numberOfApplicationsPerMonth,
-      'First Interview'
-    );
+    this.state.applicationStatus.forEach(async status => {
+      const newData = await this.sumApplicationStatus(
+        this.props.applicationBarChart.dashboardReducers
+          .numberOfApplicationsPerMonth,
+        status
+      );
+    });
+    // const newData = await this.sumApplicationStatus(
+    //   this.props.applicationBarChart.dashboardReducers
+    //     .numberOfApplicationsPerMonth,
+    //   'First Interview'
+    // );
   }
 
   render() {
