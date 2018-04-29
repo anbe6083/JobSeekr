@@ -14,7 +14,7 @@ class DoughnutChart extends Component {
         datasets: [
           {
             data: [300, 50, 100, 3],
-            backgroundColor: ['#FF6384', '#4E937A', '#3ABEFF', '#E8E288'],
+            backgroundColor: ['#DE1A1A', '#4E937A', '#3ABEFF', '#E8E288'],
             hoverBackgroundColor: ['#FF6384', '#4E937A', '#3ABEFF', '#E8E288']
           }
         ]
@@ -53,12 +53,12 @@ class DoughnutChart extends Component {
             this.props.doughnut.dashboardReducers['Third Interview']
           ],
           backgroundColor: [
-            '#FF6384',
-            '#4E937A',
-            '#3ABEFF',
-            '#E8E288',
-            '#D5A021',
-            '#A49694'
+            '#DE1A1A',
+            '#5CD668',
+            '#77878B',
+            '#25283D',
+            '#F1DB4B',
+            '#E08DAC'
           ],
           hoverBackgroundColor: ['#FF6384', '#4E937A', '#3ABEFF', '#E8E288']
         }

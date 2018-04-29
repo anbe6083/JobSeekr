@@ -4,7 +4,10 @@ import { addNewNetworkConnection } from '../actions/networkActions';
 //react-redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// const NewContact = ({dispatch}) => {
+
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
 
 class NewContact extends Component {
   constructor(props) {
@@ -13,15 +16,20 @@ class NewContact extends Component {
       firstName: '',
       lastName: '',
       linkedInUrl: '',
+      dateSubmitted: moment(),
       email: '',
       date: ''
     };
     this.onSubmit = this.onSubmit.bind(this);
+    this.onDateChange = this.onDateChange.bind(this);
     this.onChange = this.onChange.bind(this);
   }
   onChange(e) {
-    console.log(e.target.value);
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onDateChange(date) {
+    this.setState({ dateSubmitted: date });
   }
 
   onSubmit(e) {
@@ -50,6 +58,11 @@ class NewContact extends Component {
         >
           <form onSubmit={this.onSubmit}>
             <Row>
+              <label>Last Contacted Date</label>
+              <DatePicker
+                selected={this.state.dateSubmitted}
+                onChange={this.onDateChange}
+              />
               <Input
                 placeholder="First Name"
                 s={6}
